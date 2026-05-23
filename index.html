@@ -131,6 +131,10 @@
                     <input type="checkbox" id="includeTracker" checked class="w-5 h-5 text-teal-600 rounded border-slate-300">
                     <span>לוח מעקב אישי לתלמיד 📊</span>
                 </label>
+                <label class="flex items-center gap-3 cursor-pointer text-base text-slate-700 font-bold hover:bg-teal-100/50 p-1.5 rounded-lg transition-colors">
+                    <input type="checkbox" id="includeManipulatives" checked class="w-5 h-5 text-teal-600 rounded border-slate-300">
+                    <span>נספח עזרים מוחשיים (לגזירה) 📎</span>
+                </label>
             </div>
 
             <button onclick="generateStations()" class="w-full bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-black py-5 px-6 rounded-2xl shadow-xl transition-all flex items-center justify-center gap-3 text-xl border-b-4 border-teal-800 transform active:scale-95">
@@ -271,6 +275,20 @@
                                 </thead>
                                 <tbody id="trackerTableBody"></tbody>
                             </table>
+                        </div>
+                    </div>
+
+                    <!-- נספח עזרים מוחשיים -->
+                    <div id="manipulativesCard" class="bg-sky-50 rounded-3xl border-2 border-sky-300 p-8 md:p-10 shadow-md relative print-card">
+                        <div class="flex flex-wrap gap-2 absolute top-5 left-5 no-print">
+                            <button onclick="printManipulativesInNewWindow()" class="text-sm bg-sky-600 text-white hover:bg-sky-700 px-4 py-2 rounded-xl font-bold shadow-sm flex items-center gap-2">
+                                <span>🖨️</span> הדפס נספח לגזירה
+                            </button>
+                        </div>
+                        <h3 class="text-2xl font-black text-sky-950 flex items-center gap-3 mb-3"><span class="text-3xl">📎</span> נספח: עזרים מוחשיים לגזירה</h3>
+                        <p class="text-sky-800 font-medium mb-4 no-print">לתלמידים שזקוקים ללמידה קינסטטית (מוחשית). הדפיסו, גזרו וחלקו: רצועות שברים, מטבעות ישראליים, קו מספרים, רשת משבצות ולוח שעון. המורה בוחרת מה לגזור לפי הצורך.</p>
+                        <div class="bg-white/95 rounded-2xl p-6 border-2 border-sky-200 shadow-sm" id="manipulativesContent">
+                            <!-- ייוצר דינמית -->
                         </div>
                     </div>
 
@@ -563,17 +581,20 @@
                 differentiation: '<b>מתקשים:</b> התמקדות בתרגילים 1-4 עם ליווי. דוגמאות מוחשיות. <b>מתקדמים:</b> תרגילי האתגר + יצירת בעיה מקורית לחבר/ה.',
                 assessment: 'בדיקת דף תרגול + מבדק יציאה. הצלחה = 6/8 תרגילים נכונים.'
             };
+            // ─── דף תרגול חכם: בעיות מתמטיות אמיתיות עם הנושא כתימה ───
             const genericPracticeSheet = [
-                { q: `כתבו במילים שלכם: מהו "${topic}"?`, a: 'תשובה אישית — בדיקת הגדרה מינימלית.' },
-                { q: `תנו דוגמה אחת מחיי היומיום הקשורה ל-${topic}.`, a: 'תשובה אישית.' },
-                { q: `מהם 3 מושגי המפתח שלמדתם היום ב-${topic}?`, a: 'לפי תוכן השיעור הספציפי.' },
-                { q: `פתרו בעיה פשוטה הקשורה ל-${topic} (לפי דוגמת המורה).`, a: 'תלוי בדוגמה.' },
-                { q: `מה ההבדל בין שני מושגים מרכזיים ב-${topic}?`, a: 'לפי תוכן השיעור.' },
-                { q: `ציירו ייצוג חזותי המסביר את ${topic}.`, a: 'תשובה אישית.' },
-                { q: `האם ${topic} קשור לנושאים אחרים שלמדתם? לאיזה?`, a: 'תשובה אישית.' },
-                { q: `כתבו שאלה משלכם על ${topic} והעבירו לחבר/ה.`, a: 'תשובה אישית.' },
-                { q: `אתגר: צירו בעיה מורכבת על ${topic} ופתרו.`, a: 'תשובה אישית — בדיקת היגיון.' },
-                { q: `אתגר: הסבירו לחבר שלא היה בכיתה מהו ${topic} ב-3 משפטים.`, a: 'תשובה אישית.' }
+                { q: `כיתה ו' למדה ${topic} ב-4 שיעורים, כל שיעור 45 דקות. כמה דקות בסך הכל הוקדשו לנושא?`, a: '<span class="math-ltr">4 × 45 = 180</span> דקות (3 שעות)' },
+                { q: `במבחן ב-${topic} היו 25 שאלות. תלמיד ענה נכון על 80% מהן. על כמה שאלות ענה נכון?`, a: '<span class="math-ltr">25 × 80 ÷ 100 = 20</span> שאלות נכון.' },
+                { q: `מורה צריכה לחלק 84 דפי תרגול ב-${topic} בין 6 קבוצות שווה בשווה. כמה דפים לכל קבוצה?`, a: '<span class="math-ltr">84 ÷ 6 = 14</span> דפים לכל קבוצה.' },
+                { q: `מחיר ספר עזר ב-${topic} הוא 65 ש"ח. בית הספר רכש 12 ספרים. כמה שילם?`, a: '<span class="math-ltr">65 × 12 = 780</span> ש"ח' },
+                { q: `בשיעור ראשון השתתפו 28 תלמידים, בשני 31, ובשלישי 25. בכמה תלמידים יותר השתתפו בשיעור השני בהשוואה לשלישי?`, a: '<span class="math-ltr">31 − 25 = 6</span> תלמידים יותר.' },
+                { q: `אחרי שיעור ב-${topic}, חולקה עוגה ל-12 חלקים שווים. נאכלו 8. איזה שבר נשאר? צמצמו לחלוטין.`, a: '<span class="math-ltr">4/12 = 1/3</span> נשאר.' },
+                { q: `בכיתה הלומדת ${topic} יש 18 בנים ו-12 בנות. כתבו את יחס הבנים לבנות בצורתו המצומצמת.`, a: '<span class="math-ltr">18:12 = 3:2</span> (חילוק ב-6)' },
+                { q: `מחיר חוברת תרגול ב-${topic} ירד מ-50 ש"ח ל-40 ש"ח. בכמה אחוזים ירד המחיר?`, a: 'ירידה של 10 ש"ח מתוך 50 ש"ח. <span class="math-ltr">10 ÷ 50 × 100 = 20%</span>' },
+                { q: `תלמיד פתר 24 תרגילי ${topic} ב-40 דקות. בכמה דקות בממוצע פתר תרגיל אחד?`, a: '<span class="math-ltr">40 ÷ 24 ≈ 1.67</span> דקות לתרגיל (כדקה ו-40 שניות)' },
+                { q: `אתגר: ב-${topic} יש 3 רמות קושי. ברמה 1 עשו 15 תרגילים, ברמה 2 כפול מזה, וברמה 3 שליש מהרמה השנייה. סה"כ?`, a: 'רמה 1: 15. רמה 2: 30. רמה 3: 10. סה"כ: <b>55 תרגילים</b>.' },
+                { q: `אתגר: מחיר ערכת ${topic} כולל 17% מע"מ הוא 234 ש"ח. מה היה המחיר ללא מע"מ?`, a: '<span class="math-ltr">234 ÷ 1.17 = 200</span> ש"ח (לפני מע"מ)' },
+                { q: `אתגר יצירה: חברו בעיה מילולית הכוללת לפחות שתי פעולות חישוב, מתוך הקשר של ${topic}. פתרו אותה במלואה.`, a: 'תשובה אישית — בדיקה: יש שני שלבי חישוב, נתונים הגיוניים, פתרון מתמטית נכון.' }
             ];
 
             const templates = [
@@ -657,12 +678,14 @@
                 document.getElementById('practiceSheetCard').style.display = document.getElementById('includePracticeSheet').checked ? 'block' : 'none';
                 document.getElementById('exitTicketCard').style.display = document.getElementById('includeExitTicket').checked ? 'block' : 'none';
                 document.getElementById('trackerCard').style.display = document.getElementById('includeTracker').checked ? 'block' : 'none';
+                document.getElementById('manipulativesCard').style.display = document.getElementById('includeManipulatives').checked ? 'block' : 'none';
 
                 document.querySelectorAll('.topic-display').forEach(el => el.innerText = AppState.topic);
                 document.getElementById('scaffoldContent').innerHTML = AppState.scaffold;
                 document.getElementById('exitTicketContent').innerHTML = AppState.exitTicket;
                 document.getElementById('lessonPlanContent').innerHTML = buildLessonPlanHTML(AppState.lessonPlan, AppState.topic);
                 document.getElementById('practiceSheetContent').innerHTML = buildPracticeSheetHTML(AppState.practiceSheet, AppState.topic, AppState.showAnswerKey);
+                document.getElementById('manipulativesContent').innerHTML = buildManipulativesHTML(AppState.topic);
 
                 renderWorkspace();
                 showToast('🚀 מערך הלמידה העצמית שלך מוכן עם רעיונות חדשים!');
@@ -742,6 +765,215 @@
                 `).join('')}
                 ${keyBlock}
             `;
+        }
+
+        /* ──────── נספח עזרים מוחשיים (SVG לגזירה) ──────── */
+        function fractionStrip(parts, color, label) {
+            const W = 600;
+            const partW = W / parts;
+            let inner = '';
+            for (let i = 0; i < parts; i++) {
+                const fs = parts > 8 ? 11 : (parts > 5 ? 14 : 18);
+                inner += `<rect x="${i * partW}" y="0" width="${partW}" height="48" fill="${color}" stroke="#000" stroke-width="2"/>`;
+                inner += `<text x="${i * partW + partW / 2}" y="30" text-anchor="middle" font-size="${fs}" font-weight="bold" font-family="Arial">${label}</text>`;
+            }
+            return `<svg viewBox="0 0 ${W} 48" style="width:100%;display:block;margin-bottom:4px;max-width:560px">${inner}</svg>`;
+        }
+
+        function coinSVG(value, label, fill, stroke, size) {
+            size = size || 70;
+            return `<svg viewBox="0 0 100 100" style="width:${size}px;height:${size}px;display:inline-block;margin:4px">
+                <circle cx="50" cy="50" r="46" fill="${fill}" stroke="${stroke}" stroke-width="2.5"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="${stroke}" stroke-width="1" stroke-dasharray="2,2"/>
+                <text x="50" y="50" text-anchor="middle" font-size="26" font-weight="bold" font-family="Arial" fill="${stroke}">${value}</text>
+                <text x="50" y="72" text-anchor="middle" font-size="10" font-family="Arial" fill="${stroke}">${label}</text>
+            </svg>`;
+        }
+
+        function noteSVG(value, label, bg, border) {
+            return `<svg viewBox="0 0 160 80" style="width:160px;height:80px;display:inline-block;margin:4px">
+                <rect x="2" y="2" width="156" height="76" rx="6" fill="${bg}" stroke="${border}" stroke-width="2"/>
+                <rect x="10" y="10" width="140" height="60" rx="4" fill="none" stroke="${border}" stroke-width="1" stroke-dasharray="3,3"/>
+                <text x="80" y="48" text-anchor="middle" font-size="30" font-weight="bold" font-family="Arial" fill="${border}">${value}</text>
+                <text x="80" y="68" text-anchor="middle" font-size="11" font-family="Arial" fill="${border}">${label}</text>
+            </svg>`;
+        }
+
+        function numberLineSVG(min, max) {
+            const W = 700, H = 90;
+            const margin = 30;
+            const step = (W - 2 * margin) / (max - min);
+            let marks = '';
+            for (let i = min; i <= max; i++) {
+                const x = margin + (i - min) * step;
+                marks += `<line x1="${x}" y1="35" x2="${x}" y2="55" stroke="#000" stroke-width="${i === 0 ? 3 : 2}"/>`;
+                marks += `<text x="${x}" y="78" text-anchor="middle" font-size="13" font-weight="bold" font-family="Arial">${i}</text>`;
+            }
+            return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block;max-width:640px">
+                <line x1="${margin - 8}" y1="45" x2="${W - margin + 8}" y2="45" stroke="#000" stroke-width="3"/>
+                <polygon points="${margin - 12},45 ${margin - 4},40 ${margin - 4},50" fill="#000"/>
+                <polygon points="${W - margin + 12},45 ${W - margin + 4},40 ${W - margin + 4},50" fill="#000"/>
+                ${marks}
+            </svg>`;
+        }
+
+        function clockSVG() {
+            let nums = '';
+            for (let i = 1; i <= 12; i++) {
+                const ang = (i * 30 - 90) * Math.PI / 180;
+                const x = 100 + 78 * Math.cos(ang);
+                const y = 100 + 78 * Math.sin(ang);
+                nums += `<text x="${x}" y="${y + 8}" text-anchor="middle" font-size="22" font-weight="bold" font-family="Arial">${i}</text>`;
+            }
+            let ticks = '';
+            for (let i = 0; i < 60; i++) {
+                const ang = (i * 6 - 90) * Math.PI / 180;
+                const big = i % 5 === 0;
+                const r1 = big ? 88 : 92;
+                const r2 = 95;
+                ticks += `<line x1="${100 + r1 * Math.cos(ang)}" y1="${100 + r1 * Math.sin(ang)}" x2="${100 + r2 * Math.cos(ang)}" y2="${100 + r2 * Math.sin(ang)}" stroke="#000" stroke-width="${big ? 2 : 1}"/>`;
+            }
+            return `<svg viewBox="0 0 200 200" style="width:200px;height:200px">
+                <circle cx="100" cy="100" r="96" fill="#fff" stroke="#000" stroke-width="3"/>
+                ${ticks}${nums}
+                <line x1="100" y1="100" x2="100" y2="45" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="140" y2="100" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="100" cy="100" r="5" fill="#000"/>
+            </svg>`;
+        }
+
+        function placeValueCard(value, label, color) {
+            return `<svg viewBox="0 0 120 80" style="width:120px;height:80px;display:inline-block;margin:4px">
+                <rect x="2" y="2" width="116" height="76" rx="8" fill="${color}" stroke="#000" stroke-width="2"/>
+                <text x="60" y="40" text-anchor="middle" font-size="26" font-weight="bold" font-family="Arial">${value}</text>
+                <text x="60" y="64" text-anchor="middle" font-size="12" font-family="Arial">${label}</text>
+            </svg>`;
+        }
+
+        function buildManipulativesHTML(topic) {
+            // רצועות שברים
+            const strips = `
+                <h4 style="font-size:1.15rem; font-weight:900; color:#075985; margin:14px 0 10px; border-right:4px solid #0284c7; padding-right:10px;">🍕 רצועות שברים (Fraction Strips)</h4>
+                <p style="color:#475569; font-size:0.92rem; margin-bottom:8px;">גזרו לאורך הקווים. תלמידים ישתמשו בהן להשוואה, חיבור וחיסור שברים.</p>
+                <div style="border:1px dashed #94a3b8; padding:12px; border-radius:10px; margin-bottom:18px;">
+                    ${fractionStrip(1, '#fde68a', '1 שלם')}
+                    ${fractionStrip(2, '#fca5a5', '1/2')}
+                    ${fractionStrip(3, '#86efac', '1/3')}
+                    ${fractionStrip(4, '#93c5fd', '1/4')}
+                    ${fractionStrip(5, '#c4b5fd', '1/5')}
+                    ${fractionStrip(6, '#fdba74', '1/6')}
+                    ${fractionStrip(8, '#f9a8d4', '1/8')}
+                    ${fractionStrip(10, '#67e8f9', '1/10')}
+                    ${fractionStrip(12, '#bef264', '1/12')}
+                </div>
+            `;
+
+            // מטבעות וכסף
+            const coins = `
+                <h4 style="font-size:1.15rem; font-weight:900; color:#075985; margin:14px 0 10px; border-right:4px solid #0284c7; padding-right:10px;">💰 מטבעות ושטרות (כסף ישראלי)</h4>
+                <p style="color:#475569; font-size:0.92rem; margin-bottom:8px;">גזרו לפי המעגל החיצוני. שימושי לבעיות כסף, אחוזים, צרכנות.</p>
+                <div style="border:1px dashed #94a3b8; padding:14px; border-radius:10px; margin-bottom:18px; text-align:center;">
+                    <div style="margin-bottom:8px;">
+                        ${coinSVG('10', 'אגורות', '#fcd34d', '#92400e', 60)}
+                        ${coinSVG('½₪', '½ שקל', '#cbd5e1', '#334155', 64)}
+                        ${coinSVG('1₪', 'שקל', '#cbd5e1', '#334155', 68)}
+                        ${coinSVG('2₪', '2 שקלים', '#cbd5e1', '#334155', 72)}
+                        ${coinSVG('5₪', '5 שקלים', '#cbd5e1', '#334155', 76)}
+                        ${coinSVG('10₪', '10 שקלים', '#fcd34d', '#334155', 80)}
+                    </div>
+                    <div>
+                        ${noteSVG('20₪', 'עשרים שקלים', '#fee2e2', '#991b1b')}
+                        ${noteSVG('50₪', 'חמישים שקלים', '#dcfce7', '#166534')}
+                        ${noteSVG('100₪', 'מאה שקלים', '#fed7aa', '#9a3412')}
+                        ${noteSVG('200₪', 'מאתיים שקלים', '#dbeafe', '#1e40af')}
+                    </div>
+                </div>
+            `;
+
+            // קו מספרים
+            const numLine = `
+                <h4 style="font-size:1.15rem; font-weight:900; color:#075985; margin:14px 0 10px; border-right:4px solid #0284c7; padding-right:10px;">📏 קו מספרים (10− עד 20)</h4>
+                <p style="color:#475569; font-size:0.92rem; margin-bottom:8px;">גזרו לאורך. שימושי לחיבור, חיסור, מספרים שליליים, אומדן.</p>
+                <div style="border:1px dashed #94a3b8; padding:14px; border-radius:10px; margin-bottom:18px;">
+                    ${numberLineSVG(-10, 10)}
+                    ${numberLineSVG(0, 20)}
+                </div>
+            `;
+
+            // רשת משבצות
+            const grid = `
+                <h4 style="font-size:1.15rem; font-weight:900; color:#075985; margin:14px 0 10px; border-right:4px solid #0284c7; padding-right:10px;">🟦 רשת משבצות לגזירה</h4>
+                <p style="color:#475569; font-size:0.92rem; margin-bottom:8px;">15×15 משבצות. שימושי לחישוב שטח, היקף, גזירת צורות, בניית מצולעים.</p>
+                <div style="border:1px dashed #94a3b8; padding:14px; border-radius:10px; margin-bottom:18px;">
+                    <div style="width:450px;max-width:100%;height:450px;background-image:linear-gradient(#94a3b8 1px, transparent 1px), linear-gradient(90deg, #94a3b8 1px, transparent 1px);background-size:30px 30px;border:2px solid #000;"></div>
+                </div>
+            `;
+
+            // לוח שעון
+            const clock = `
+                <h4 style="font-size:1.15rem; font-weight:900; color:#075985; margin:14px 0 10px; border-right:4px solid #0284c7; padding-right:10px;">🕐 לוח שעון לגזירה</h4>
+                <p style="color:#475569; font-size:0.92rem; margin-bottom:8px;">גזרו את העיגול ואת המחוגים בנפרד, וקבעו את המחוגים במרכז עם מתפת או סיכת רישום.</p>
+                <div style="border:1px dashed #94a3b8; padding:14px; border-radius:10px; margin-bottom:18px; text-align:center;">
+                    ${clockSVG()}
+                    <div style="margin-top:8px;">
+                        <svg viewBox="0 0 180 30" style="width:180px;height:30px">
+                            <rect x="2" y="11" width="170" height="8" rx="4" fill="#000"/>
+                            <circle cx="170" cy="15" r="6" fill="#000"/>
+                            <text x="85" y="6" text-anchor="middle" font-size="8" font-family="Arial">מחוג ארוך (דקות)</text>
+                        </svg><br>
+                        <svg viewBox="0 0 120 30" style="width:120px;height:30px">
+                            <rect x="2" y="11" width="110" height="8" rx="4" fill="#000"/>
+                            <circle cx="110" cy="15" r="6" fill="#000"/>
+                            <text x="55" y="6" text-anchor="middle" font-size="8" font-family="Arial">מחוג קצר (שעות)</text>
+                        </svg>
+                    </div>
+                </div>
+            `;
+
+            // כרטיסי ערכי מקום
+            const placeVal = `
+                <h4 style="font-size:1.15rem; font-weight:900; color:#075985; margin:14px 0 10px; border-right:4px solid #0284c7; padding-right:10px;">🔢 כרטיסי ערכי מקום</h4>
+                <p style="color:#475569; font-size:0.92rem; margin-bottom:8px;">גזרו את הכרטיסים לתרגול ערכי מקום ומספרים עשרוניים.</p>
+                <div style="border:1px dashed #94a3b8; padding:14px; border-radius:10px; margin-bottom:18px; text-align:center;">
+                    ${placeValueCard('1', 'אחדות', '#fef3c7')}
+                    ${placeValueCard('10', 'עשרות', '#dbeafe')}
+                    ${placeValueCard('100', 'מאות', '#dcfce7')}
+                    ${placeValueCard('1000', 'אלפים', '#fce7f3')}
+                    ${placeValueCard('0.1', 'עשירית', '#e0e7ff')}
+                    ${placeValueCard('0.01', 'מאית', '#fee2e2')}
+                </div>
+            `;
+
+            return `
+                <div style="text-align:center; border-bottom:2px dashed #cbd5e1; padding-bottom:12px; margin-bottom:14px;">
+                    <h2 style="font-size:1.5rem; font-weight:900; margin-bottom:4px;">📎 נספח עזרים מוחשיים</h2>
+                    <div style="color:#475569; font-size:0.95rem;">לתלמידים בלמידה קינסטטית · נושא: ${topic}</div>
+                </div>
+                <div style="background:#fef3c7; border-right:4px solid #f59e0b; padding:12px 16px; border-radius:0 10px 10px 0; margin-bottom:18px; font-size:0.92rem;">
+                    <b>הוראות למורה:</b> הדפיסו את הדפים הרצויים על דף עבה (קרטון 160 גרם מומלץ), גזרו לאורך הקווים, ואפשרו לתלמיד להחזיק ביד בזמן הלמידה.
+                </div>
+                ${strips}
+                ${coins}
+                ${numLine}
+                ${grid}
+                ${placeVal}
+                ${clock}
+            `;
+        }
+
+        function printManipulativesInNewWindow() {
+            const content = document.getElementById('manipulativesContent').innerHTML;
+            const w = window.open('', '_blank');
+            w.document.write(`<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="UTF-8"><title>נספח עזרים - ${AppState.topic}</title>
+            <style>
+                @page { size: A4 portrait; margin: 12mm; }
+                body { font-family: Arial, sans-serif; direction: rtl; line-height: 1.5; padding: 14px; color: #0f172a; }
+                h2, h4 { page-break-after: avoid; }
+                svg { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                div { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            </style></head><body>${content}</body></html>`);
+            w.document.close();
+            setTimeout(()=>w.print(), 600);
         }
 
         function toggleAnswerKey() {
@@ -927,13 +1159,14 @@
                     <h2 style="color: #6d28d9;">📄 דף תרגול קצר</h2>
                     ${practiceSheetForStudent}
                 </div>
-                <div class="station-page">
+                <div class="station-page page-break">
                     <h2 style="color: #9f1239;">מבדק מסכם - ${AppState.topic}</h2>
                     <div class="mission-box" style="border-color: #fda4af;">${exitTicketContent}</div>
                     <div class="math-grid-container" style="min-height: 200px;"><div class="math-grid"></div></div>
                     <h2 style="color: #064e3b; margin-top: 40px;">לוח מעקב אישי</h2>
                     ${trackerContent}
                 </div>
+                ${document.getElementById('includeManipulatives').checked ? `<div class="station-page">${document.getElementById('manipulativesContent').innerHTML}</div>` : ''}
             `;
 
             const printWindow = window.open('', '_blank');
