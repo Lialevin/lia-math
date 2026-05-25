@@ -64,15 +64,15 @@
 </head>
 <body class="bg-slate-50 min-h-screen text-slate-800 flex flex-col antialiased text-lg">
 
-    <header class="bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-700 text-white shadow-lg no-print">
-        <div class="max-w-7xl mx-auto px-4 py-8 flex items-center justify-between gap-6">
-            <div class="flex items-center gap-5">
-                <div class="bg-white/20 p-4 rounded-full backdrop-blur-md shadow-inner">
-                    <span class="text-4xl">🦉</span>
+    <header class="bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-700 text-white shadow-xl no-print">
+        <div class="max-w-7xl mx-auto px-4 py-10 flex items-center justify-between gap-6">
+            <div class="flex items-center gap-6">
+                <div class="bg-white/25 p-5 rounded-full backdrop-blur-md shadow-inner ring-4 ring-white/10">
+                    <span class="text-5xl">🦉</span>
                 </div>
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-1">העוזר האישי שלך בהוראת חשבון</h1>
-                    <p class="text-teal-100 text-lg md:text-xl font-medium">מחולל מלא — מערך שיעור, תחנות למידה, מצגת, מבדק יציאה ודפי עבודה</p>
+                    <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-2 drop-shadow">העוזר האישי שלך בהוראת חשבון</h1>
+                    <p class="text-teal-50 text-xl md:text-2xl font-bold">תוכנית הלימודים מכיתה א׳ ועד ו׳ — מערך, תחנות למידה עצמית, דפי תרגול ומבדקים</p>
                 </div>
             </div>
         </div>
@@ -90,18 +90,25 @@
             </div>
 
             <div>
-                <label for="topicInput" class="block text-lg font-bold text-slate-700 mb-3">נושא השיעור במתמטיקה:</label>
-                <input type="text" id="topicInput" class="w-full bg-slate-50 border-2 border-slate-200 focus:border-teal-500 outline-none p-4 rounded-2xl text-slate-800 text-lg font-bold transition-all" placeholder="הקלידי נושא חופשי או בחרי מטה...">
+                <label for="gradeSelect" class="block text-xl font-black text-slate-800 mb-3">📚 שלב 1: בחרי כיתה</label>
+                <select id="gradeSelect" onchange="populateTopics()" class="w-full bg-white border-2 border-teal-300 focus:border-teal-600 outline-none p-4 rounded-2xl text-slate-800 text-xl font-bold transition-all mb-5 cursor-pointer shadow-sm">
+                    <option value="">— בחרי כיתה —</option>
+                    <option value="א">כיתה א׳</option>
+                    <option value="ב">כיתה ב׳</option>
+                    <option value="ג">כיתה ג׳</option>
+                    <option value="ד">כיתה ד׳</option>
+                    <option value="ה">כיתה ה׳</option>
+                    <option value="ו">כיתה ו׳</option>
+                </select>
 
-                <div class="mt-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                    <span class="text-sm text-slate-500 font-bold block mb-3">נושאים מובנים לחשיבה מסדר גבוה:</span>
-                    <div class="flex flex-col gap-2 h-56 overflow-y-auto pr-2" style="scrollbar-width: thin;">
-                        <button onclick="quickFill('חיבור וחיסור שברים עם מכנים שונים')" class="text-right text-sm bg-white hover:bg-teal-50 text-slate-700 hover:text-teal-700 px-3 py-2 rounded-xl transition-colors font-bold border border-slate-200 shadow-sm">🍕 חיבור וחיסור שברים (מכנים שונים)</button>
-                        <button onclick="quickFill('כפל וחילוק שברים עשרוניים')" class="text-right text-sm bg-white hover:bg-teal-50 text-slate-700 hover:text-teal-700 px-3 py-2 rounded-xl transition-colors font-bold border border-slate-200 shadow-sm">🔢 כפל וחילוק שברים עשרוניים</button>
-                        <button onclick="quickFill('אחוזים ויחס: צרכנות נבונה')" class="text-right text-sm bg-white hover:bg-teal-50 text-slate-700 hover:text-teal-700 px-3 py-2 rounded-xl transition-colors font-bold border border-slate-200 shadow-sm">💯 אחוזים ויחס (מבצעים וחלוקה)</button>
-                        <button onclick="quickFill('הנדסה: חקר שטחי מצולעים')" class="text-right text-sm bg-white hover:bg-teal-50 text-slate-700 hover:text-teal-700 px-3 py-2 rounded-xl transition-colors font-bold border border-slate-200 shadow-sm">📐 הנדסה: חקר שטחי מצולעים</button>
-                        <button onclick="quickFill('בעיות מילוליות רב-שלביות')" class="text-right text-sm bg-white hover:bg-teal-50 text-slate-700 hover:text-teal-700 px-3 py-2 rounded-xl transition-colors font-bold border border-slate-200 shadow-sm">🧩 בעיות מילוליות רב-שלביות</button>
-                    </div>
+                <label for="topicSelect" class="block text-xl font-black text-slate-800 mb-3">🎯 שלב 2: בחרי נושא מתוך תוכנית הלימודים</label>
+                <select id="topicSelect" onchange="onTopicSelected()" class="w-full bg-white border-2 border-teal-300 focus:border-teal-600 outline-none p-4 rounded-2xl text-slate-800 text-lg font-bold transition-all mb-5 cursor-pointer shadow-sm" disabled>
+                    <option value="">— בחרי קודם כיתה —</option>
+                </select>
+
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <label for="topicInput" class="block text-base font-bold text-slate-700 mb-2">או — הקלידי נושא חופשי:</label>
+                    <input type="text" id="topicInput" class="w-full bg-white border-2 border-slate-200 focus:border-teal-500 outline-none p-3 rounded-xl text-slate-800 text-lg font-bold transition-all" placeholder="כל נושא אחר ממקצוע המתמטיקה...">
                 </div>
             </div>
 
@@ -137,8 +144,8 @@
                 </label>
             </div>
 
-            <button onclick="generateStations()" class="w-full bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-black py-5 px-6 rounded-2xl shadow-xl transition-all flex items-center justify-center gap-3 text-xl border-b-4 border-teal-800 transform active:scale-95">
-                <span>🧠</span><span>חולל לי מערך ללמידה עצמית!</span>
+            <button onclick="generateStations()" class="w-full bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-black py-6 px-6 rounded-2xl shadow-2xl transition-all flex items-center justify-center gap-3 text-2xl border-b-4 border-teal-800 transform active:scale-95 ring-2 ring-teal-300/40 hover:ring-4">
+                <span class="text-3xl">🚀</span><span>צרי לי שיעור מלא!</span>
             </button>
         </section>
 
@@ -146,10 +153,16 @@
         <section class="lg:col-span-8 flex flex-col gap-8">
 
             <div id="welcomeState" class="bg-white rounded-3xl border border-slate-200 p-10 md:p-16 text-center shadow-md flex flex-col items-center justify-center gap-8 h-full min-h-[600px]">
-                <div class="bg-teal-50 p-8 rounded-full text-teal-600 shadow-inner"><span class="text-6xl">🤖</span></div>
-                <div class="max-w-2xl">
-                    <h3 class="text-3xl font-black text-slate-800 mb-4">המנוע הפדגוגי המלא מוכן</h3>
-                    <p class="text-slate-600 text-xl font-medium">המערכת מייצרת לכל נושא: מערך שיעור פורמלי (למורה), תחנות למידה עצמית, מצגת הקנייה, דף תרגול עם פתרונות, מבדק יציאה ולוח מעקב.</p>
+                <div class="bg-teal-50 p-8 rounded-full text-teal-600 shadow-inner ring-4 ring-teal-100"><span class="text-7xl">📚</span></div>
+                <div class="max-w-3xl">
+                    <h3 class="text-4xl md:text-5xl font-black text-slate-800 mb-5 leading-tight">ברוכה הבאה — בואי נתחיל!</h3>
+                    <p class="text-slate-700 text-xl md:text-2xl font-bold leading-relaxed mb-4">בחרי כיתה ונושא מתוכנית הלימודים, וקבלי שיעור שלם עם:</p>
+                    <ul class="text-slate-700 text-lg md:text-xl font-bold space-y-2 text-right max-w-md mx-auto">
+                        <li>📋 <span class="text-teal-700">מערך שיעור פדגוגי</span> מפורט למורה</li>
+                        <li>🧭 <span class="text-teal-700">4 תחנות למידה</span> — כל אחת עם כרטיס לימוד עצמאי</li>
+                        <li>📝 <span class="text-teal-700">דף תרגול ומבדק</span> להערכה</li>
+                        <li>📎 <span class="text-teal-700">נספח עזרים מוחשיים</span> לתלמידים קינסטטיים</li>
+                    </ul>
                 </div>
             </div>
 
@@ -307,8 +320,130 @@
 
     <script>
         /* ════════════════════════════════════════════════════
+           תוכנית לימודים — מהמסמך הרשמי של המפמ"ר (תשפ"ו)
+           ════════════════════════════════════════════════════ */
+        const CURRICULUM = {
+            'א': [
+                { id: 'numbers_to_100', label: 'הכרת המספרים הטבעיים והאפס עד 100' },
+                { id: 'number_line_a', label: 'ישר המספרים וסדרות בדילוגים' },
+                { id: 'add_sub_20', label: 'חיבור וחיסור בתחום ה-20' },
+                { id: 'add_sub_100_tens', label: 'חיבור וחיסור עשרות שלמות בתחום ה-100' },
+                { id: 'polygons_basic', label: 'מצולעים — מיון ושיום' },
+                { id: 'length_basic', label: 'מדידות אורך' },
+                { id: 'clock_basic', label: 'קריאת שעון מחוגים בשעות שלמות' },
+                { id: 'data_basic', label: 'חקר נתונים: דיאגרמת עמודות ופיקטוגרם' }
+            ],
+            'ב': [
+                { id: 'numbers_to_1000', label: 'המספרים הטבעיים בתחום ה-1,000 וערך המקום' },
+                { id: 'add_sub_100', label: 'חיבור וחיסור בתחום ה-100' },
+                { id: 'mult_div_meaning', label: 'משמעויות הכפל והחילוק (כפולות 2, 4, 5, 10)' },
+                { id: 'length_cm_m', label: 'מדידות אורך בס"מ ובמטר, היקף מצולעים' },
+                { id: 'triangles_basic', label: 'משולשים — שיום לפי צלעות, זווית ישרה' },
+                { id: 'solids_basic', label: 'גופים: זיהוי, השוואת נפחים' },
+                { id: 'clock_half', label: 'מדידות זמן (שעות שלמות, חצי שעה, רבעי שעה)' },
+                { id: 'data_b', label: 'איסוף וייצוג נתונים — דיאגרמת עמודות, פיקטוגרם' }
+            ],
+            'ג': [
+                { id: 'decimal_structure', label: 'המבנה העשרוני, הגדלה והקטנה פי 10 ופי 100' },
+                { id: 'add_sub_rebava', label: 'חיבור וחיסור בתחום הרבבה' },
+                { id: 'mult_table', label: 'לוח הכפל וחילוק עם שארית' },
+                { id: 'mult_tens_hundreds', label: 'כפל בעשרות ובמאות שלמות' },
+                { id: 'operation_laws', label: 'חוקי הפעולות (חילוף, קיבוץ, פילוג)' },
+                { id: 'rounding', label: 'עיגול מספרים ואומדן' },
+                { id: 'divisibility_basic', label: 'סימני התחלקות ב-2, ב-5 וב-10' },
+                { id: 'order_operations', label: 'סדר פעולות ושימוש בסוגריים' },
+                { id: 'fractions_intro', label: 'הכרת שברי יחידה וחלק של כמות' },
+                { id: 'parallel_perpendicular', label: 'מאונכות ומקבילות' },
+                { id: 'angles', label: 'זוויות (חדות, ישרות, קהות, שטוחות)' },
+                { id: 'triangles_classify', label: 'מיון משולשים לפי זוויות וצלעות' },
+                { id: 'quadrilaterals', label: 'מרובעים: ריבוע, מלבן, מקבילית, מעוין, טרפז' },
+                { id: 'length_units', label: 'מדידות אורך — מ"מ, ס"מ, מ\', ק"מ' },
+                { id: 'time_units', label: 'מדידות זמן (ימים, שעות, דקות, שניות)' }
+            ],
+            'ד': [
+                { id: 'million_structure', label: 'המספרים הטבעיים בתחום המיליון' },
+                { id: 'add_sub_million', label: 'חיבור וחיסור במאונך של מספרים רב-ספרתיים' },
+                { id: 'long_mult', label: 'כפל במאונך, כפל בעשרות ובמאות' },
+                { id: 'long_div', label: 'חילוק ארוך' },
+                { id: 'prime_composite', label: 'מספרים ראשוניים ופריקים, סימני התחלקות ב-3, 6, 9' },
+                { id: 'fraction_intro', label: 'הכרת השבר הפשוט וצמצום' },
+                { id: 'fraction_add_sub', label: 'חיבור וחיסור שברים' },
+                { id: 'fraction_mult_whole', label: 'כפל שלם בשבר' },
+                { id: 'diagonals', label: 'אלכסונים במצולעים' },
+                { id: 'rectangle_area', label: 'שטח והיקף של ריבוע ומלבן (מ"ר, סמ"ר)' },
+                { id: 'triangle_props', label: 'תכונות של זוויות וצלעות במשולש' },
+                { id: 'box_volume', label: 'תיבות — נפח ושטח פנים' },
+                { id: 'calendar_time', label: 'לוח השנה וחישובי זמן' },
+                { id: 'data_double_bar', label: 'דיאגרמת עמודות כפולה ומוטות' }
+            ],
+            'ה': [
+                { id: 'operations_integrative', label: 'פעולות החשבון — שאלות אינטגרטיביות' },
+                { id: 'pre_algebra', label: 'פיתוח חשיבה קדם-אלגברית' },
+                { id: 'fraction_meaning_5', label: 'משמעות השבר כחלק של שלם, כמות, מנה' },
+                { id: 'fraction_compare', label: 'צמצום, הרחבה והשוואת שברים' },
+                { id: 'decimal_meaning', label: 'משמעות השבר העשרוני, מעבר ממספר עשרוני לשבר' },
+                { id: 'decimal_compare', label: 'השוואת מספרים עשרוניים' },
+                { id: 'fraction_add_sub_5', label: 'חיבור וחיסור שברים פשוטים' },
+                { id: 'decimal_add_sub', label: 'חיבור וחיסור שברים עשרוניים' },
+                { id: 'percent_intro', label: 'אחוזים — היכרות' },
+                { id: 'quadrilateral_props', label: 'מרובעים: תכונות, מיון, קשרי הכלה' },
+                { id: 'triangle_area', label: 'גובה של מקבילית ומשולש, שטח משולש' },
+                { id: 'composite_area', label: 'שטח של צורות מורכבות, יחידות שטח' },
+                { id: 'mean_average', label: 'ממוצע — תכונות ומציאה' },
+                { id: 'frequency_tables', label: 'טבלאות שכיחות' }
+            ],
+            'ו': [
+                { id: 'operations_advanced', label: 'מספרים ופעולות — הרחבה והעמקה' },
+                { id: 'fraction_on_line', label: 'שברים פשוטים ועשרוניים על ישר המספרים' },
+                { id: 'fraction_mult_div', label: 'כפל וחילוק שברים פשוטים' },
+                { id: 'decimal_mult_div', label: 'כפל וחילוק מספרים עשרוניים' },
+                { id: 'part_whole', label: 'מציאת ערך החלק ומציאת השלם ע"פ החלק' },
+                { id: 'percent_calc', label: 'אחוזים — חישוב ערך האחוז וחישוב האחוז' },
+                { id: 'ratio', label: 'יחס — הגדרה, תכונות, חלוקה לפי יחס' },
+                { id: 'scale', label: 'קנה מידה' },
+                { id: 'decimal_units', label: 'מידות עשרוניות — מעבר בין יחידות' },
+                { id: 'composite_area_6', label: 'שטחים והיקפים של מצולעים מורכבים' },
+                { id: 'solids_3d', label: 'גופים: מנסרה, פירמידה, גליל וחרוט' },
+                { id: 'volume_calc', label: 'חישוב נפח (תיבה, גליל, חרוט, מנסרה, פירמידה, כדור)' },
+                { id: 'circle', label: 'מעגל ועיגול: היקף ושטח' },
+                { id: 'frequency_relative', label: 'שכיחות יחסית ושכיח' }
+            ]
+        };
+
+        function populateTopics() {
+            const grade = document.getElementById('gradeSelect').value;
+            const sel = document.getElementById('topicSelect');
+            sel.innerHTML = '';
+            if (!grade || !CURRICULUM[grade]) {
+                sel.innerHTML = '<option value="">— בחרי קודם כיתה —</option>';
+                sel.disabled = true;
+                return;
+            }
+            sel.disabled = false;
+            const opt0 = document.createElement('option');
+            opt0.value = '';
+            opt0.textContent = '— בחרי נושא —';
+            sel.appendChild(opt0);
+            CURRICULUM[grade].forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.id;
+                opt.textContent = t.label;
+                sel.appendChild(opt);
+            });
+        }
+
+        function onTopicSelected() {
+            const sel = document.getElementById('topicSelect');
+            const opt = sel.options[sel.selectedIndex];
+            if (opt && opt.value) {
+                document.getElementById('topicInput').value = opt.textContent;
+            }
+        }
+
+        /* ════════════════════════════════════════════════════
            בסיס נתונים פדגוגי — לכל נושא:
            lessonPlan + scaffold + stations + practiceSheet + exitTicket
+           מבנה תחנות חדש: תרגילים → בעיות מילוליות → הסקת מסקנות → אתגר
            ════════════════════════════════════════════════════ */
         const PEDAGOGICAL_DB = {
             'fractions': {
@@ -354,10 +489,34 @@
                 <b>שאלה 1:</b> נטע פתרה כך: <span class="math-ltr">1/3 + 1/4 = 2/7</span>. הסבירו מדוע נטע טועה, ופתרו נכון.<br>
                 <b>שאלה 2:</b> חברו תרגיל חיסור שברים שהתשובה שלו היא בדיוק <span class="math-ltr">1/2</span>, כאשר המכנים חייבים להיות שונים.`,
                 stations: [
-                    { title: "חקר: תעלומת המכנה האבוד", goal: "גמישות מחשבתית וגילוי", time: "10-12 דקות", instructions: "חקרו את המשוואה החסרה. נסו למצוא לפחות 2 אפשרויות שונות.", mission: `<b>תעלומת השלם:</b><br>לפניכם המשוואה הבאה: <span class="math-ltr">1/2 + [ ? ] + [ ? ] = 1</span><br><br>השלימו את המשוואה בשני שברים כך שסך הכל נקבל שלם אחד. המכנים חייבים להיות שונים זה מזה.`, hint: `האם אתם מכירים שני שברים שסכומם הוא בדיוק חצי? נסו להשתמש ב <span class="math-ltr">1/4</span> או <span class="math-ltr">1/3</span>.`, bonus: `מצאו אפשרות שבה אחד המכנים הוא מספר דו-ספרתי (למשל 10 או 12).`, solutions: `אפשרות לדוגמה: <span class="math-ltr">1/4 + 2/8</span>, או <span class="math-ltr">1/3 + 1/6</span>.` },
-                    { title: "יישום: קונדיטוריית השברים", goal: "פתרון בעיה מילולית בחיי היומיום", time: "15 דקות", instructions: "מרקרו את הנתונים, כתבו תרגיל, וחשבו צעד אחר צעד במחברת.", mission: `<b>הזמנה גדולה:</b><br>הקונדיטור השתמש ב-<span class="math-ltr">3/4</span> ק"ג קמח לבן, וב-<span class="math-ltr">2/5</span> ק"ג קמח מלא.<br>1️⃣ כמה ק"ג קמח בסך הכל שם הקונדיטור בעוגה?<br>2️⃣ בסוף היום נשארו בשק הקמח הלבן <span class="math-ltr">1 1/2</span> ק"ג. כמה היה בשק בתחילת היום?`, hint: `בשאלה 1: מצאו מכנה משותף ל-4 ו-5. בשאלה 2: חברו את מה שנשאר עם מה שהשתמשו.`, bonus: `אם עוגה אחת דורשת את הכמות שחישבתם, כמה קמח נצטרך ל-3 עוגות זהות?`, solutions: `1) <span class="math-ltr">3/4 + 2/5 = 15/20 + 8/20 = 23/20</span> ק"ג. <br>2) <span class="math-ltr">1 1/2 + 3/4 = 2 1/4</span> ק"ג.` },
-                    { title: "העמקה: ניתוח שגיאות", goal: "איתור שגיאות ופיתוח ביקורתיות", time: "10 דקות", instructions: "קראו את הפתרון של אלון. זהו את הטעות וכתבו הסבר למניעתה בעתיד.", mission: `<b>המבחן של אלון:</b><br>תרגיל: <span class="math-ltr">2 1/3 - 4/5 = ?</span><br>אלון הרחיב: <span class="math-ltr">2 5/15 - 12/15</span>.<br>הוא כתב: "אי אפשר להוריד 12 מ-5, אז הורדתי מ-12 את ה-5 וקיבלתי 7. התשובה שלי: <span class="math-ltr">2 7/15</span>."<br>הסבירו מה הטעות שלו, ופתרו נכון.`, hint: `בחיסור אין חוק חילוף! אי אפשר להפוך את הסדר. עליכם "לפרוט" שלם אחד מתוך ה-2 שלמים.`, bonus: `חברו תרגיל חיסור שברים משלכם שמחייב פריטה מאתגרת.`, solutions: `אלון שגה כשהפך את סדר החיסור. הוא היה צריך לפרוט: <span class="math-ltr">1 20/15 - 12/15 = 1 8/15</span>.` },
-                    { title: "רפלקציה ויצירה", goal: "סיכום ובניית מבחן", time: "15 דקות", instructions: "הפכו למורים! חברו בעיה עבור החברים שלכם ופתרו אותה.", mission: `<b>בונים את המבחן הבא:</b><br>1️⃣ חברו בעיה מילולית מחיי היומיום שדורשת גם חיבור וגם חיסור של שברים עם מכנים שונים.<br>2️⃣ פתרו את הבעיה באופן מלא כ"מחוון תשובות".<br>3️⃣ מה היה לכם הכי מאתגר היום בלמידה העצמית?`, hint: `תכננו את הבעיה כך שמי שיפתור אותה יצטרך למצוא קודם סכום מסוים, ואז להחסיר ממנו.`, bonus: `נסו לשלב בבעיה שיצרתם גם שבר פשוט וגם מספר עשרוני.`, solutions: `תשובה חופשית. בדיקה: האם הבעיה הגיונית והפתרון תקין מתמטית?` }
+                    { kind: 'exercises', title: 'תחנה 1: תרגילים', goal: 'שליטה באלגוריתם של חיבור וחיסור שברים', time: '12 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>איך מחברים שברים עם מכנים שונים?</b></p><ol style="margin-right:22px; line-height:1.9;"><li><b>מכנה משותף:</b> הכפלה של המכנים (3 × 4 = 12), או המכנה הגדול אם הוא כפולה של הקטן.</li><li><b>הרחבה:</b> <span class="math-ltr">1/3 = 4/12</span> ; <span class="math-ltr">1/4 = 3/12</span>.</li><li><b>חיבור המונים בלבד.</b> המכנה נשאר.</li><li><b>צמצום</b> בסוף אם אפשר.</li></ol><p style="margin-top:10px; font-size:1.05rem;">💡 דוגמה: <span class="math-ltr">1/3 + 1/4 = 4/12 + 3/12 = 7/12</span></p>`,
+                      instructions: 'פתרו 5 תרגילים בסדר. הראו את כל הצעדים.',
+                      mission: `<b>פתרו:</b><br>1) <span class="math-ltr">1/2 + 1/4 = ?</span><br>2) <span class="math-ltr">2/3 + 1/6 = ?</span><br>3) <span class="math-ltr">3/4 − 1/2 = ?</span><br>4) <span class="math-ltr">5/6 − 2/3 = ?</span><br>5) <span class="math-ltr">1/3 + 1/5 = ?</span>`,
+                      hint: 'מכנים משותפים: (2,4)→4 ; (3,6)→6 ; (4,2)→4 ; (6,3)→6 ; (3,5)→15.',
+                      bonus: '<span class="math-ltr">7/10 − 2/5 = ?</span>',
+                      solutions: `1) <span class="math-ltr">3/4</span><br>2) <span class="math-ltr">5/6</span><br>3) <span class="math-ltr">1/4</span><br>4) <span class="math-ltr">1/6</span><br>5) <span class="math-ltr">8/15</span><br>בונוס: <span class="math-ltr">3/10</span>` },
+                    { kind: 'word_problems', title: 'תחנה 2: בעיות מילוליות', goal: 'יישום שברים בחיי היומיום', time: '15 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>איך פותרים בעיה מילולית?</b></p><ol style="margin-right:22px; line-height:1.9;"><li><b>קוראים פעמיים</b> וסומנים את הנתונים.</li><li><b>מתרגמים מילים לפעולה:</b> "ביחד" = חיבור ; "נשאר" = חיסור ; "פי" = כפל.</li><li><b>כותבים תרגיל</b> ופותרים.</li><li><b>בודקים</b> שהתשובה הגיונית.</li></ol><p style="margin-top:10px; font-size:1.05rem;">💡 "אכלו 1/4 + 1/3 מהפיצה" → תרגיל: <span class="math-ltr">1/4 + 1/3</span></p>`,
+                      instructions: 'קראו, סמנו, כתבו תרגיל ופתרו.',
+                      mission: `<b>בעיה 1:</b> אבא אכל <span class="math-ltr">1/4</span> מהפיצה ואמא <span class="math-ltr">3/8</span>. מה החלק שאכלו ביחד?<br><br><b>בעיה 2:</b> בכד <span class="math-ltr">5/6</span> ליטר יין. שתו <span class="math-ltr">1/3</span> ליטר. כמה נשאר?<br><br><b>בעיה 3:</b> קונדיטור שם <span class="math-ltr">3/4</span> ק"ג קמח לבן ועוד <span class="math-ltr">2/5</span> ק"ג קמח מלא. כמה ק"ג סך הכל?`,
+                      hint: '"ביחד" = +. "נשאר" = −. תמיד מכנה משותף!',
+                      bonus: 'בבעיה 3 — ל-3 עוגות כאלה כמה קמח?',
+                      solutions: `1) <span class="math-ltr">1/4 + 3/8 = 2/8 + 3/8 = 5/8</span> מהפיצה.<br>2) <span class="math-ltr">5/6 − 1/3 = 5/6 − 2/6 = 3/6 = 1/2</span> ליטר.<br>3) <span class="math-ltr">3/4 + 2/5 = 15/20 + 8/20 = 23/20 = 1 3/20</span> ק"ג.<br>בונוס: <span class="math-ltr">3 × 23/20 = 69/20 = 3 9/20</span> ק"ג.` },
+                    { kind: 'conclusion', title: 'תחנה 3: 3 תרגילי הסקת מסקנות', goal: 'חשיבה ביקורתית — השוואה, איתור טעות, הכללה', time: '12 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>מה זה "להסיק מסקנה"?</b></p><p style="line-height:1.7;">לא רק לפתור — אלא <b>להבין למה</b>. 3 דרכים:</p><ul style="margin-right:22px; line-height:1.9;"><li>🔍 <b>השוואה:</b> מי גדול יותר? למה?</li><li>🐛 <b>איתור טעות:</b> מצאו איפה התלמיד טעה.</li><li>📋 <b>הכללה:</b> מה הכלל שעובד תמיד?</li></ul><p style="margin-top:10px; font-size:1.05rem;">💡 חובה <b>להסביר בכתב</b>, לא רק לכתוב תוצאה!</p>`,
+                      instructions: 'פתרו את 3 התרגילים. לכל אחד הסבירו את ההיגיון!',
+                      mission: `<b>1) השוואה:</b> איזה שבר גדול יותר: <span class="math-ltr">2/3</span> או <span class="math-ltr">3/4</span>? נמקו עם מכנה משותף.<br><br><b>2) איתור טעות:</b> נטע פתרה: <span class="math-ltr">1/3 + 1/4 = 2/7</span>. הסבירו את הטעות ותקנו.<br><br><b>3) הכללה:</b> האם נכון ש"ככל שהמכנה גדול יותר — השבר גדול יותר"? בדקו את 1/2 לעומת 1/100.`,
+                      hint: 'בהשוואה — מכנה משותף. בטעות — אסור מונה+מונה ומכנה+מכנה. בהכללה — נסו דוגמה קיצונית.',
+                      bonus: 'נסחו כלל משלכם להשוואת שברים.',
+                      solutions: `<b>1)</b> מכנה משותף 12: <span class="math-ltr">2/3=8/12, 3/4=9/12</span>. אז <b>3/4 גדול</b>.<br><b>2)</b> נטע חיברה מונה+מונה ומכנה+מכנה — שגוי! נכון: מכנה משותף 12 → <span class="math-ltr">4/12 + 3/12 = 7/12</span>.<br><b>3)</b> <b>לא נכון!</b> 1/2 = חצי. 1/100 = פירור זעיר. ככל שהמכנה גדול — כל חלק קטן יותר!` },
+                    { kind: 'challenge', title: 'תחנה 4: אתגר', goal: 'יצירתיות וחשיבה מסדר גבוה', time: '15 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>אתגר = לימוד עמוק!</b></p><p>כאן אין תשובה אחת. נסו, טעו, תקנו.</p><p>💪 <b>3 אסטרטגיות:</b></p><ul style="margin-right:22px; line-height:1.9;"><li>נסו <b>מקרה פשוט</b> ראשון.</li><li>חפשו <b>תבנית או חוקיות</b>.</li><li><b>הסבירו בכתב</b> את הדרך.</li></ul>`,
+                      instructions: 'נסו כמה אפשרויות. הוכיחו את הפתרון.',
+                      mission: `<b>תעלומת השלם:</b><br><br>השלימו: <span class="math-ltr">1/2 + [ ? ] + [ ? ] = 1</span><br><br>שני שברים שונים זה מזה, ושני מכנים שונים זה מזה.<br><b>מצאו לפחות 3 פתרונות שונים!</b>`,
+                      hint: 'אחרי 1/2 חייב להישאר 1/2. נסו: <span class="math-ltr">1/3 + 1/6 = 3/6 = 1/2</span> ✓',
+                      bonus: 'מצאו פתרון שבו אחד המכנים גדול מ-10.',
+                      solutions: `<b>פתרונות לדוגמה:</b><br>• <span class="math-ltr">1/2 + 1/3 + 1/6 = 1</span> ✓<br>• <span class="math-ltr">1/2 + 1/4 + 2/8 = 1</span> ✓<br>• <span class="math-ltr">1/2 + 2/5 + 1/10 = 1</span> ✓<br>בונוס: <span class="math-ltr">1/2 + 1/4 + 3/12 = 1</span> ✓` }
                 ]
             },
             'decimals': {
@@ -403,10 +562,34 @@
                 <b>שאלה 1:</b> חשבו במאונך: <span class="math-ltr">15 - 3.42 = ?</span> (אל תשכחו להוסיף אפסים ל-15!).<br>
                 <b>שאלה 2:</b> מה גדול יותר - <span class="math-ltr">4.2 × 100</span> או <span class="math-ltr">42 × 10</span>?`,
                 stations: [
-                    { title: "חקר: אשליית הגודל", goal: "הבנת ערך מיקום", time: "10 דקות", instructions: "קראו את הדיון של התלמידים וקבעו מי צודק.", mission: `<b>0.4 לעומת 0.198</b><br>דני: "0.198 יותר גדול כי יש לו 3 ספרות ול-0.4 רק אחת!"<br>מאיה: "דני טועה, 0.4 גדול יותר."<br>מי צודק? הוכיחו בצורה מתמטית.`, hint: `נסו להוסיף אפסים "שומרי מקום" ל-0.4 כדי שגם לו יהיו 3 ספרות אחרי הנקודה (אלפיות).`, bonus: `כתבו 3 שברים עשרוניים שונים שנמצאים בדיוק בין 0.4 ל-0.198.`, solutions: `מאיה צודקת. <span class="math-ltr">0.4 = 0.400</span>, ולכן 400 אלפיות גדולות מ-198 אלפיות.` },
-                    { title: "יישום: חשבון במסעדה", goal: "חיבור וחיסור עשרוניים", time: "15 דקות", instructions: "ארגנו את הנתונים, חשבו במאונך והקפידו על הנקודה.", mission: `משפחת לוי הזמינה 4 ארוחות במחיר <span class="math-ltr">45.50</span> ש"ח לאחת, ו-3 קינוחים במחיר <span class="math-ltr">22.80</span> ש"ח לאחד.<br>האב שילם בשטר של 300 ש"ח.<br>כמה עודף הוא יקבל?`, hint: `חשבו תחילה את מחיר כל הארוחות יחד. לאחר מכן את כל הקינוחים. חסרו מ-300.00.`, bonus: `אם המשפחה רוצה להשאיר טיפ של 10% מסך הארוחה, כמה יהיה הטיפ?`, solutions: `ארוחות: 182. קינוחים: 68.40. סך הכל: 250.40 ש"ח. עודף: 49.60 ש"ח.` },
-                    { title: "העמקה: מכונת קפיצת הנקודה", goal: "כפל/חילוק ב-10/100", time: "12 דקות", instructions: "זהו את הפעולה שהמכונה ביצעה על כל מספר.", mission: `מכונה כופלת או מחלקת ב-10 או ב-100. גלו את הפעולה:<br>א) נכנס <b>4.5</b> -> יצא <b>450</b>.<br>ב) נכנס <b>312.5</b> -> יצא <b>3.125</b>.<br>ג) המכונה התקלקלה: כפלה ב-100 ומיד חילקה ב-10. מה יצא אם נכניס <b>1.2</b>?`, hint: `אם התוצאה גדלה (הנקודה ימינה) - זה כפל. ספרו כמה "קפיצות" עשתה הנקודה.`, bonus: `מצאו פעולה אחת שתחליף את "הקלקול" מהסעיף השלישי.`, solutions: `א) כפל ב-100. ב) חילוק ב-100. ג) יצא 12. (זה שקול לכפל ב-10).` },
-                    { title: "רפלקציה: מכתב הסבר", goal: "ניסוח מילולי של אלגוריתם", time: "10 דקות", instructions: "הסבירו לחבר צעיר את חוקי החיסור.", mission: `תלמיד כיתה ה' עומד ללמוד <b>חיסור שברים עשרוניים במאונך</b>.<br>כתבו לו קטע קצר ובו 2 חוקי הברזל שעליו לזכור כדי לא לטעות. תנו דוגמה מספרית.`, hint: `חשבו על החוק של "נקודה מתחת לנקודה" ועל מה עושים כשיש חור ריק מעל ספרה.`, bonus: `ציירו תרשים גרפי קטן שמסכם את ההסבר שלכם.`, solutions: `הסבר הכולל יישור נקודות והוספת אפסים שומרי מקום. דוגמה: <span class="math-ltr">5.20 - 1.34</span>.` }
+                    { kind: 'exercises', title: 'תחנה 1: תרגילים', goal: 'חיבור, חיסור, כפל וחילוק עשרוניים', time: '12 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>4 כללי זהב לעשרוניים:</b></p><ol style="margin-right:22px; line-height:1.9;"><li><b>חיבור/חיסור במאונך:</b> נקודה מתחת לנקודה! אם חסרות ספרות — מוסיפים אפסים שומרי מקום.</li><li><b>כפל:</b> כופלים בלי הנקודה, ובסוף סופרים סה"כ מקומות עשרוניים בשני הגורמים.</li><li><b>×10, ×100, ×1000:</b> הנקודה זזה ימינה.</li><li><b>÷10, ÷100, ÷1000:</b> הנקודה זזה שמאלה.</li></ol><p style="margin-top:10px; font-size:1.05rem;">💡 דוגמה: <span class="math-ltr">2.5 × 100 = 250</span> (2 קפיצות ימינה)</p>`,
+                      instructions: 'פתרו 5 תרגילים. הראו את המאונך.',
+                      mission: `<b>פתרו:</b><br>1) <span class="math-ltr">4.35 + 3.80 = ?</span><br>2) <span class="math-ltr">7.50 − 2.85 = ?</span><br>3) <span class="math-ltr">0.06 × 100 = ?</span><br>4) <span class="math-ltr">450 ÷ 100 = ?</span><br>5) <span class="math-ltr">2.5 × 4 = ?</span>`,
+                      hint: 'בחיבור/חיסור — נקודה מתחת לנקודה. בכפל ×100 — נקודה זזה 2 ימינה. בחילוק ÷100 — 2 שמאלה.',
+                      bonus: '<span class="math-ltr">12.6 − 0.45 = ?</span>',
+                      solutions: `1) <span class="math-ltr">8.15</span><br>2) <span class="math-ltr">4.65</span><br>3) <span class="math-ltr">6</span><br>4) <span class="math-ltr">4.5</span><br>5) <span class="math-ltr">10</span><br>בונוס: <span class="math-ltr">12.15</span>` },
+                    { kind: 'word_problems', title: 'תחנה 2: בעיות מילוליות', goal: 'יישום עשרוניים בצרכנות ובמדידה', time: '15 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>בעיות עשרוניות מהחיים:</b></p><ul style="margin-right:22px; line-height:1.9;"><li><b>כסף:</b> 4.75 ש"ח = 4 ש"ח ו-75 אגורות.</li><li><b>משקל:</b> 1.5 ק"ג = ק"ג ו-500 גרם.</li><li><b>אורך:</b> 2.3 מ' = 2 מ' ו-30 ס"מ.</li></ul><p style="margin-top:10px; font-size:1.05rem;">💡 כשמכפילים מחיר בכמות — סופרים מקומות עשרוניים מהשניים יחד.</p>`,
+                      instructions: 'קראו, סמנו נתונים, וכתבו תרגיל מתאים.',
+                      mission: `<b>בעיה 1:</b> משפחת לוי הזמינה 4 ארוחות ב-<span class="math-ltr">45.50</span> ש"ח כל אחת, ו-3 קינוחים ב-<span class="math-ltr">22.80</span> ש"ח כל אחד. שילמה ב-300 ש"ח. כמה עודף?<br><br><b>בעיה 2:</b> קניתי <span class="math-ltr">1.5</span> ק"ג תפוחים ב-<span class="math-ltr">5.60</span> ש"ח/ק"ג. כמה שילמתי?<br><br><b>בעיה 3:</b> 3 חפיסות עוגיות ב-<span class="math-ltr">4.75</span> ש"ח כל אחת. כמה סך הכל?`,
+                      hint: 'תכננו את החישוב לפי שלבים. בכפל — שימו לב למקומות עשרוניים.',
+                      bonus: 'אם הוסיפו לבעיה 1 טיפ של 20 ש"ח, מה השאלה משתנה?',
+                      solutions: `1) ארוחות: 4×45.50=182. קינוחים: 3×22.80=68.40. סה"כ: 250.40. עודף: <b>49.60 ש"ח</b>.<br>2) <span class="math-ltr">5.60 × 1.5 = 8.40</span> ש"ח.<br>3) <span class="math-ltr">4.75 × 3 = 14.25</span> ש"ח.<br>בונוס: 250.40 + 20 = 270.40. עודף: 29.60 ש"ח.` },
+                    { kind: 'conclusion', title: 'תחנה 3: 3 תרגילי הסקת מסקנות', goal: 'איתור טעות, השוואה, גילוי תבנית', time: '12 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>הסקת מסקנות בעשרוניים</b> — שאלות נפוצות:</p><ul style="margin-right:22px; line-height:1.9;"><li>איזה עשרוני גדול יותר ולמה?</li><li>איפה התלמיד טעה בחישוב?</li><li>איך זזה הנקודה בכפל/חילוק?</li></ul><p style="margin-top:10px; font-size:1.05rem;">💡 טריק: השוו ספרה-ספרה משמאל לימין (אחרי השלמת אפסים).</p>`,
+                      instructions: 'פתרו את 3 התרגילים והסבירו בכתב.',
+                      mission: `<b>1) השוואה:</b> דני אומר ש-<span class="math-ltr">0.198</span> גדול מ-<span class="math-ltr">0.4</span> "כי יש לו יותר ספרות". מי צודק? הוכיחו.<br><br><b>2) איתור טעות:</b> תלמיד פתר: <span class="math-ltr">0.06 × 100 = 0.6</span>. איפה הטעות? תקנו.<br><br><b>3) תבנית:</b> מכונה משנה מספרים: <span class="math-ltr">4.5→450, 312.5→3.125</span>. גלו איזה פעולה היא מבצעת בכל מקרה.`,
+                      hint: 'בהשוואה — הוסיפו אפסים: 0.4=0.400. בטעות — סופרים את הקפיצות. בתבנית — כיוון הזזת הנקודה מגלה הכל.',
+                      bonus: 'בתבנית — אם המכונה כפלה ב-100 ואז חילקה ב-10, מה היא בעצם עשתה?',
+                      solutions: `<b>1)</b> 0.4 = 0.400 = <b>400 אלפיות</b>. 0.198 = 198 אלפיות. אז 0.4 גדול.<br><b>2)</b> 0.06 × 100 = הנקודה זזה 2 מקומות ימינה: 0.06 → 0.6 → <b>6</b> (לא 0.6).<br><b>3)</b> 4.5→450: כפל ב-100 (2 ימינה). 312.5→3.125: חילוק ב-100 (2 שמאלה).<br>בונוס: זה שווה ל-כפל ב-10.` },
+                    { kind: 'challenge', title: 'תחנה 4: אתגר', goal: 'חשיבה רב-שלבית עם עשרוניים', time: '15 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>אתגר עשרוני</b> — מערב לרוב יותר מפעולה אחת. תכננו את הסדר!</p><ul style="margin-right:22px; line-height:1.9;"><li>פרקו את הבעיה לשלבים קטנים.</li><li>שמרו על הנקודה במקום הנכון.</li><li>בדקו הגיון כל תוצאה.</li></ul>`,
+                      instructions: 'תכננו את הסדר. עבדו צעד-צעד.',
+                      mission: `<b>קניות שופינג:</b><br><br>קניתי <span class="math-ltr">2.5</span> ק"ג תפוחים ב-<span class="math-ltr">5.60</span> ש"ח/ק"ג, ו-<span class="math-ltr">1.5</span> ק"ג ענבים ב-<span class="math-ltr">8.40</span> ש"ח/ק"ג.<br>שילמתי בשטר של 50 ש"ח.<br><b>שאלות:</b><br>א) כמה שילמתי בסך הכל?<br>ב) כמה עודף קיבלתי?<br>ג) אם המחיר היה עולה ב-10%, כמה הייתי משלמת?`,
+                      hint: 'שלב 1: תפוחים בנפרד. שלב 2: ענבים בנפרד. שלב 3: סה"כ. שלב 4: עודף.',
+                      bonus: 'מהו המשקל הגדול ביותר של תפוחים שיכולתי לקנות ב-50 ש"ח?',
+                      solutions: `<b>א)</b> תפוחים: <span class="math-ltr">2.5 × 5.60 = 14</span>. ענבים: <span class="math-ltr">1.5 × 8.40 = 12.60</span>. סה"כ: <b>26.60 ש"ח</b>.<br><b>ב)</b> עודף: 50 − 26.60 = <b>23.40 ש"ח</b>.<br><b>ג)</b> 26.60 × 1.1 = <b>29.26 ש"ח</b>.<br>בונוס: 50 ÷ 5.60 ≈ 8.93 ק"ג (כ-8.9 ק"ג).` }
                 ]
             },
             'percentages': {
@@ -452,10 +635,34 @@
                 <b>שאלה 1:</b> בכיתה יש 40 תלמידים. 25% מהם בחוג כדורגל. כמה תלמידים בחוג?<br>
                 <b>שאלה 2:</b> היחס בין בנים לבנות הוא 2:3. אם יש 10 בנים, כמה בנות יש בכיתה?`,
                 stations: [
-                    { title: "חקר: אשליית ה-50% כפול שניים", goal: "הבנת האחוז מתוך השלם", time: "10 דקות", instructions: "האם 50 ועוד 50 זה תמיד 100? קראו והוכיחו.", mission: `<b>החולצה בחינם?</b><br>רוני ראה חולצה שעולה 200 שקלים עם שלט: "50% הנחה!". <br>לרוני היה גם קופון מועדון שנותן "50% הנחה נוספת על המחיר שלאחר ההנחה הראשונה".<br>רוני צהל: "יש! 50 ועוד 50 זה 100% הנחה. החולצה בחינם!"<br>האם רוני צודק? חשבו כמה הוא ישלם בסוף.`, hint: `חשבו קודם את המחיר אחרי ההנחה הראשונה. הקופון מופעל על המחיר *החדש*, לא על ה-200.`, bonus: `איזה אחוז הנחה *אחד* היה משתווה לשתי ההנחות של רוני יחד?`, solutions: `רוני טועה. 50% מ-200 זה 100 ש"ח. 50% מה-100 שנותרו זה 50 ש"ח. הוא ישלם 50 ש"ח.` },
-                    { title: "יישום: שותפות בעסקים", goal: "חלוקת כמות לפי יחס נתון", time: "15 דקות", instructions: "שרטטו טבלת יחסים או ציור של 'מנות' במחברת.", mission: `<b>דוכן הלימונדה:</b><br>דנה ויעל פתחו דוכן לימונדה. דנה השקיעה יותר שעות עבודה, ולכן הן סיכמו שהרווח יחולק ביחס של <b>2:3</b> (לטובת דנה).<br>בסוף היום הן הרוויחו 150 שקלים.<br>כמה שקלים תקבל כל אחת מהן?`, hint: `חברו את חלקי היחס (2+3) כדי לדעת לכמה "מנות" שוות לחלק את 150 השקלים.`, bonus: `אם יעל רצתה לקבל בדיוק 90 שקלים מהרווח של אותו יום, מה היה צריך להיות היחס?`, solutions: `סה"כ 5 מנות. 150/5 = 30. דנה מקבלת 3 מנות (90 ש"ח), יעל 2 מנות (60 ש"ח).` },
-                    { title: "העמקה: ניתוח שגיאות של קונים", goal: "חישוב נכון של חלק מכמות", time: "12 דקות", instructions: "זהו את הטעות בחישוב האחוזים של הלקוח.", mission: `<b>טעות בקופה:</b><br>לקוח קנה אוזניות שעולות 300 ש"ח והייתה עליהן הנחה של 20%.<br>הלקוח חישב בראש: "20% מ-100 זה 20. אז מ-300 זה בטח להוריד 20 שקלים. אני אשלם 280!"<br>מה הטעות הלוגית שלו? איך תסבירו לו מה החישוב הנכון וכמה עליו לשלם?`, hint: `אם 20% מ-100 ש"ח זה 20 ש"ח, מה קורה כשיש לנו 300 ש"ח? צריך לכפול את ההנחה.`, bonus: `הציעו ללקוח "טריק" קל לחישוב 20% מכל מספר שמסתיים באפס.`, solutions: `ההנחה היא 20 שקלים על *כל 100*, לכן ההנחה היא 60 ש"ח. הוא ישלם 240 ש"ח.` },
-                    { title: "רפלקציה ויצירה: מנהלי החנות", goal: "יצירת בעיות מורכבות", time: "15 דקות", instructions: "אתם עכשיו מנהלי החנות. חברו בעיה מילולית מאתגרת.", mission: `<b>מבצע סוף עונה:</b><br>חברו בעיה שבה לקוח קונה שני מוצרים שונים. לכל מוצר יש אחוז הנחה אחר.<br>הציגו את מחירי המוצרים, את ההנחות, וחשבו כמה הוא ישלם בסוף בקופה.<br><b>רפלקציה:</b> מה הדרך שהכי קל לכם לחשב אחוזים? (למשל: בעזרת שברים, כפל, אומדן...)`, hint: `בחרו מספרים שקל לחשב איתם, כמו 10%, 25% (רבע) או 50% (חצי).`, bonus: `הוסיפו לבעיה שלכם גם מע"מ (מס תוספת) של 17% על התשלום הסופי.`, solutions: `בדיקה שהתלמיד חישב נכון שני אחוזים שונים מסכומים שונים וחיבר כראוי.` }
+                    { kind: 'exercises', title: 'תחנה 1: תרגילים', goal: 'חישוב אחוז וחישוב מחיר אחרי הנחה', time: '12 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>אחוז = חלק ממאה.</b></p><ul style="margin-right:22px; line-height:1.9;"><li>50% = ½ ; 25% = ¼ ; 10% = 1/10</li><li><b>נוסחה:</b> X% מ-N = <span class="math-ltr">N × X ÷ 100</span></li><li><b>מחיר אחרי הנחה:</b> מחיר − סכום ההנחה.</li><li><b>מע"מ 17%:</b> מחיר × 1.17.</li></ul><p style="margin-top:10px; font-size:1.05rem;">💡 דוגמה: 20% מ-150 = <span class="math-ltr">150 × 20 ÷ 100 = 30</span></p>`,
+                      instructions: 'פתרו 5 תרגילים. הראו את החישוב.',
+                      mission: `<b>חשבו:</b><br>1) 50% מ-80 = ?<br>2) 25% מ-200 = ?<br>3) 10% מ-450 = ?<br>4) חולצה 80 ש"ח, הנחה 25%. מחיר אחרי הנחה?<br>5) ספר 100 ש"ח + מע"מ 17%. מחיר סופי?`,
+                      hint: 'נוסחה: N × X ÷ 100. מחיר אחרי הנחה = מקורי − הנחה.',
+                      bonus: '40% מ-150 = ?',
+                      solutions: `1) <b>40</b><br>2) <b>50</b><br>3) <b>45</b><br>4) 25% מ-80=20. מחיר: <b>60 ש"ח</b><br>5) 100 × 1.17 = <b>117 ש"ח</b><br>בונוס: <b>60</b>` },
+                    { kind: 'word_problems', title: 'תחנה 2: בעיות מילוליות', goal: 'יישום אחוזים בצרכנות וביחס', time: '15 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>בעיות אחוזים מהחיים:</b></p><ul style="margin-right:22px; line-height:1.9;"><li><b>הנחה:</b> סכום ההנחה = מחיר מקורי × אחוז ÷ 100.</li><li><b>יחס 2:3</b> = שתי "מנות" לחלק אחד, שלוש לאחר. סה"כ 5 מנות.</li><li><b>מציאת השלם:</b> אם X% = סכום, אז השלם = סכום ÷ X × 100.</li></ul>`,
+                      instructions: 'סמנו נתונים, הפכו למספרים, פתרו במחברת.',
+                      mission: `<b>בעיה 1:</b> נעליים ב-250 ש"ח עם הנחה של 20%. כמה תשלמו?<br><br><b>בעיה 2:</b> בכיתה 30 תלמידים, 40% בנות. כמה בנות?<br><br><b>בעיה 3:</b> דנה ויעל מחלקות 150 ש"ח ביחס 3:2 (לטובת דנה). כמה כל אחת מקבלת?`,
+                      hint: 'בעיה 1 — חשבו 20% ואז חסרו. בעיה 2 — נוסחת אחוז. בעיה 3 — סה"כ 5 מנות, ערך מנה = 150÷5.',
+                      bonus: 'אם המחיר בבעיה 1 היה אחרי 25% הנחה (לא 20%) — כמה היה משלם?',
+                      solutions: `1) 20% מ-250 = 50. מחיר: <b>200 ש"ח</b>.<br>2) 40% מ-30 = <b>12 בנות</b>.<br>3) סה"כ 5 מנות. ערך מנה: 150÷5 = 30. דנה: 3×30 = <b>90 ש"ח</b>. יעל: 2×30 = <b>60 ש"ח</b>.<br>בונוס: 25% מ-250 = 62.50. מחיר: 187.50 ש"ח.` },
+                    { kind: 'conclusion', title: 'תחנה 3: 3 תרגילי הסקת מסקנות', goal: 'איתור טעות, הוכחה, השוואה', time: '12 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>טעויות נפוצות באחוזים:</b></p><ul style="margin-right:22px; line-height:1.9;"><li>"20% מ-300 זה 20" — לא! זה 60.</li><li>"50% + 50% = 100% הנחה" — לא! ההנחה השנייה חלה על המחיר אחרי הראשונה.</li><li>אחוז גדול לא אומר חיסכון גדול — תלוי במחיר.</li></ul>`,
+                      instructions: 'פתרו 3 תרגילים. כל אחד עם הסבר!',
+                      mission: `<b>1) איתור טעות:</b> לקוח חישב 20% הנחה על אוזניות ב-300 ש"ח: "20% מ-100 = 20, אז אני אשלם 280". איפה הטעות? כמה ישלם באמת?<br><br><b>2) אשליה:</b> חולצה 200 ש"ח. הנחה 50% + קופון 50% הנחה נוספת. רוני אומר "החולצה בחינם!". האם נכון?<br><br><b>3) השוואה:</b> חנות א׳: מדפסת 600 ש"ח, הנחה 20%. חנות ב׳: אותה מדפסת 550 ש"ח, הנחה 10%. איפה זול יותר?`,
+                      hint: 'בעיה 1 — האחוז גדל עם הסכום. בעיה 2 — חשבו צעד-צעד את ההנחה השנייה. בעיה 3 — חישבו מחיר סופי בכל חנות.',
+                      bonus: 'בבעיה 2 — איזה הנחה אחת תהיה שווה לשתי ההנחות יחד?',
+                      solutions: `<b>1)</b> 20% מ-100=20 ש"ח, אבל יש לנו 300, כך שההנחה = 60 ש"ח. ישלם <b>240 ש"ח</b>.<br><b>2)</b> לא נכון! אחרי הנחה ראשונה: 100 ש"ח. הקופון של 50% חל על 100, לא על 200. ישלם <b>50 ש"ח</b>.<br><b>3)</b> חנות א׳: 600×0.8=<b>480</b>. חנות ב׳: 550×0.9=<b>495</b>. חנות א׳ זולה ב-15 ש"ח.<br>בונוס: 75% הנחה אחת = 50 ש"ח (אותו דבר).` },
+                    { kind: 'challenge', title: 'תחנה 4: אתגר', goal: 'בעיות אחוזים הפוכות וצרכנות מורכבת', time: '15 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>בעיות הפוכות באחוזים</b> — כשמכירים את החלק ומחפשים את השלם.</p><ul style="margin-right:22px; line-height:1.9;"><li>אם 20% הנחה ⇒ משלמים <b>80%</b> מהמחיר.</li><li>אם משלמים 200 ש"ח אחרי 20% הנחה ⇒ זה 80% מהמקורי.</li><li>מקורי = <span class="math-ltr">200 ÷ 0.8 = 250</span></li></ul>`,
+                      instructions: 'אתגר רב-שלבי. תכננו!',
+                      mission: `<b>תעלומת המחיר המקורי:</b><br><br>בגד אחרי הנחה של 20% עולה 160 ש"ח.<br>א) מה היה המחיר המקורי?<br>ב) אם הוסיפו 17% מע"מ על המחיר הסופי, כמה תשלמו?<br>ג) <b>אתגר יצירה:</b> חברו בעיה משלכם שבה נתון מחיר אחרי הנחה ושואלים את המקורי.`,
+                      hint: 'א) מחיר אחרי = 80% מהמקורי. ב) ×1.17. ג) בחרו מספרים נוחים.',
+                      bonus: 'בבעיה שיצרתם — מה ההנחה המקסימלית שאפשרית בלי שהמוכר יפסיד (אם המחיר הסיטונאי הוא חצי)?',
+                      solutions: `<b>א)</b> 160 ÷ 0.8 = <b>200 ש"ח</b> (מקורי).<br><b>ב)</b> 160 × 1.17 = <b>187.20 ש"ח</b>.<br><b>ג)</b> תשובה אישית — בדיקה: יש נתון של מחיר אחרי הנחה, אחוז הנחה, ושואלים את המקורי.<br>בונוס: אם מחיר סיטונאי = 50% מהקמעונאי, אז ההנחה המקסימלית = 50%.` }
                 ]
             },
             'geometry': {
@@ -501,10 +708,34 @@
                 <b>שאלה 1:</b> למשולש יש בסיס באורך 10 ס"מ וגובה באורך 4 ס"מ. מה שטחו?<br>
                 <b>שאלה 2:</b> יש לכם מלבן ששטחו 40 סמ"ר. ציירו משולש כלשהו (כל משולש) בתוך המלבן כך ששטח המשולש יהיה 20 סמ"ר. איך ייראה?`,
                 stations: [
-                    { title: "חקר: פרדוקס ההיקף והשטח", goal: "הבחנה בין היקף לשטח", time: "10 דקות", instructions: "ציירו במחברת ונסו להפריך את הטענה בעזרת דוגמאות.", mission: `<b>האם גדול יותר שווה שטח גדול יותר?</b><br>שירה אומרת: "אם למלבן א' יש היקף גדול יותר ממלבן ב', אז בהכרח גם השטח שלו גדול יותר!"<br>האם שירה צודקת? <br>הוכיחו בעזרת ציור של שני מלבנים שונים (עם מידות צלעות) המפריכים את הטענה.`, hint: `נסו לצייר מלבן אחד שהוא "ארוך ודק מאוד" (למשל 1 ס"מ על 10 ס"מ) לעומת מלבן "שמן" יותר (למשל 4 ס"מ על 5 ס"מ).`, bonus: `מהו המלבן בעל השטח הגדול ביותר שאפשר ליצור מחוט באורך 20 ס"מ?`, solutions: `שירה טועה. מלבן של 1x10 (היקף 22, שטח 10) מול מלבן 4x5 (היקף 18, שטח 20).` },
-                    { title: "יישום: תכנון הגינה העירונית", goal: "חישוב שטחים מורכבים", time: "15 דקות", instructions: "חלקו את הגינה לצורות פשוטות שאתם מכירים (מלבן ומשולש).", mission: `<b>חישוב שטח מורכב:</b><br>עירייה רוצה לשתול דשא בגינה שצורתה מורכבת מ<b>מלבן</b> ובקצהו <b>משולש</b> שמחובר אליו.<br>מידות המלבן: 8 מטרים על 5 מטרים.<br>בסיס המשולש (מחובר לאחת מצלעות ה-5 מטר) והגובה של המשולש היוצא מהבסיס הוא 4 מטרים.<br>מהו השטח הכולל של הגינה?`, hint: `חשבו את שטח המלבן בנפרד (8 כפול 5). לאחר מכן חשבו את שטח המשולש (בסיס 5, גובה 4, ולחלק ב-2). חברו יחד.`, bonus: `אם כל מ"ר של דשא עולה 30 שקלים, כמה תעלה שתילת הדשא בגינה כולה?`, solutions: `שטח מלבן = 40 מ"ר. שטח משולש = (5x4)/2 = 10 מ"ר. שטח כולל = 50 מ"ר.` },
-                    { title: "העמקה: מלכודת הגובה", goal: "זיהוי נכון של גובה ובסיס", time: "10 דקות", instructions: "זהו את טעות המדידה האופיינית לחישובי משולשים.", mission: `<b>ניתוח שגיאה:</b><br>תלמיד קיבל שרטוט של משולש קהה-זווית. אורך הבסיס הוא 6 ס"מ. אורך הצלע הנטויה הוא 8 ס"מ, והגובה החיצוני (שיורד להמשך הבסיס) הוא 4 ס"מ.<br>התלמיד חישב: "6 כפול 8 חלקי 2 שווה 24 סמ"ר!"<br>מה הטעות הקריטית של התלמיד? מה השטח הנכון?`, hint: `האם מותר להכפיל את הבסיס בצלע שאינה יוצרת איתו זווית ישרה (90 מעלות)? מהו הגובה האמיתי כאן?`, bonus: `ציירו משולש משלכם שבו שני הגבהים נמצאים בכלל מחוץ למשולש.`, solutions: `הטעות היא כפל בצלע הנטויה ולא בגובה. החישוב הנכון משתמש בגובה 4: (6x4)/2 = 12 סמ"ר.` },
-                    { title: "רפלקציה ויצירה: אדריכלות", goal: "תכנון מבוסס אילוצים", time: "15 דקות", instructions: "שרטטו תוכנית דירה על רשת המשבצות במחברת.", mission: `<b>הבית שלכם:</b><br>תכננו (ציירו) דירה שיש בה 3 חדרים מלבניים וסלון אחד בצורת מקבילית או טרפז. <br>סך כל השטח של הדירה חייב להיות בדיוק 100 מ"ר (קבעו בעצמכם את מידות החדרים שיובילו לסכום הזה).<br><b>רפלקציה:</b> איזה חלק בחישובי שטחים מרגיש לכם כרגע הכי מובן וקל?`, hint: `כתבו מראש על דף מה יהיו השטחים של 4 החדרים (למשל 20, 20, 30, 30) ואז מצאו צלעות שיתאימו לכל חדר.`, bonus: `הוסיפו מרפסת בצורת משולש שאינה נכללת בשטח ה-100 מ"ר, וחשבו את שטחה.`, solutions: `בדיקת היגיון מתמטי: האם סכום שטחי החדרים שיצר התלמיד אכן שווה ל-100.` }
+                    { kind: 'exercises', title: 'תחנה 1: תרגילים', goal: 'חישוב שטח והיקף של מלבן, ריבוע ומשולש', time: '12 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>נוסחאות יסוד:</b></p><ul style="margin-right:22px; line-height:1.9;"><li><b>מלבן:</b> שטח = אורך × רוחב. היקף = 2×(אורך+רוחב).</li><li><b>ריבוע:</b> שטח = צלע². היקף = 4 × צלע.</li><li><b>משולש:</b> שטח = (בסיס × גובה) ÷ 2.</li></ul><p style="margin-top:10px; font-size:1.05rem;">💡 <b>הגובה חייב</b> ליצור 90° עם הבסיס. אל תכפילו בצלע נטויה!</p>`,
+                      instructions: 'פתרו 5 תרגילים. כתבו את הנוסחה שהשתמשתם בה.',
+                      mission: `<b>חשבו:</b><br>1) מלבן 8×5. שטח? היקף?<br>2) ריבוע צלע 7. שטח? היקף?<br>3) משולש: בסיס 8, גובה 5. שטח?<br>4) מגרש 100×60. שטח? היקף?<br>5) משולש: בסיס 6, גובה 8. שטח?`,
+                      hint: 'מלבן = a×b. ריבוע = a². משולש = (b×h)÷2.',
+                      bonus: 'מלבן ששטחו 36 ס"מ² וצלע אחת 9 ס"מ. מהי הצלע השנייה?',
+                      solutions: `1) שטח=<b>40</b> סמ"ר ; היקף=<b>26</b> ס"מ.<br>2) שטח=<b>49</b> סמ"ר ; היקף=<b>28</b> ס"מ.<br>3) (8×5)÷2=<b>20</b> סמ"ר.<br>4) שטח=<b>6,000</b> מ"ר ; היקף=<b>320</b> מ׳.<br>5) (6×8)÷2=<b>24</b> סמ"ר.<br>בונוס: 36÷9=<b>4 ס"מ</b>.` },
+                    { kind: 'word_problems', title: 'תחנה 2: בעיות מילוליות', goal: 'יישום שטחים בחיי היומיום ובצורות מורכבות', time: '15 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>צורות מורכבות:</b></p><ul style="margin-right:22px; line-height:1.9;"><li><b>חלקו</b> את הצורה לחלקים פשוטים (מלבנים, משולשים).</li><li><b>חשבו</b> כל חלק בנפרד.</li><li><b>חברו או חסרו</b> לפי הצורה.</li></ul><p style="margin-top:10px; font-size:1.05rem;">💡 לצורה בצורת L — אפשר גם "להוריד" חלק חסר ממלבן שלם.</p>`,
+                      instructions: 'ציירו סקיצה. סמנו מידות. פתרו במחברת.',
+                      mission: `<b>בעיה 1:</b> חדר 5×4 מ׳. צובעים רצפה ב-15 ש"ח למ"ר. כמה ישלמו?<br><br><b>בעיה 2:</b> גינה בצורת מלבן (8×5 מ׳) ובקצהו משולש מחובר (בסיס 5, גובה 4). מהו השטח הכולל?<br><br><b>בעיה 3:</b> פרצלה L: מלבן חיצוני 8×6 מ׳, חתך חסר 3×4 מ׳. מה שטח הפרצלה?`,
+                      hint: 'בעיה 1 — שטח × מחיר. בעיה 2 — מלבן + משולש. בעיה 3 — מלבן − חתך.',
+                      bonus: 'אם מ"ר דשא בבעיה 2 עולה 30 ש"ח — כמה עולה כל הגינה?',
+                      solutions: `1) 5×4=20 מ"ר. עלות: 20×15=<b>300 ש"ח</b>.<br>2) מלבן: 8×5=40. משולש: (5×4)÷2=10. סה"כ: <b>50 מ"ר</b>.<br>3) מלבן שלם: 8×6=48. חתך: 3×4=12. שטח L: <b>36 מ"ר</b>.<br>בונוס: 50×30=<b>1,500 ש"ח</b>.` },
+                    { kind: 'conclusion', title: 'תחנה 3: 3 תרגילי הסקת מסקנות', goal: 'הוכחה, איתור טעות, הכללה', time: '12 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>הסקה גיאומטרית — שאלות מרכזיות:</b></p><ul style="margin-right:22px; line-height:1.9;"><li>האם להיקף ולשטח קשר ישיר?</li><li>איך מזהים גובה אמיתי במשולש?</li><li>מהו הקשר בין הצלעות לשטח?</li></ul>`,
+                      instructions: 'פתרו 3 תרגילים. הסבירו בעזרת ציור.',
+                      mission: `<b>1) הפרכה:</b> שירה: "מלבן עם היקף גדול יותר — תמיד שטחו גדול יותר". הוכיחו שלא נכון בעזרת 2 דוגמאות נגדיות (מלבנים עם מידות שונות).<br><br><b>2) איתור טעות:</b> תלמיד פתר משולש קהה-זווית: בסיס 6, צלע נטויה 8, גובה חיצוני 4. הוא חישב: "6×8÷2=24 ס"מ²". איפה הטעות? מה השטח הנכון?<br><br><b>3) הכללה:</b> מ-3 מלבנים שונים כולם בעלי היקף 20 ס"מ — מי בעל השטח הגדול ביותר? נסו לפחות 3 מלבנים שונים.`,
+                      hint: 'בעיה 1 — נסו 1×10 לעומת 4×5. בעיה 2 — הגובה האמיתי הוא 4, לא 8. בעיה 3 — חישבו 1×9, 2×8, 4×6, 5×5.',
+                      bonus: 'בבעיה 3 — מהי הצורה בעלת השטח הגדול ביותר עם היקף 20?',
+                      solutions: `<b>1)</b> מלבן 1×10: היקף=22, שטח=10. מלבן 4×5: היקף=18, שטח=20. ההפך נכון!<br><b>2)</b> הטעות: כפל בצלע נטויה (8) במקום בגובה (4). נכון: <span class="math-ltr">(6×4)÷2 = 12</span> ס"מ².<br><b>3)</b> 1×9=9, 2×8=16, 4×6=24, 5×5=25. <b>הריבוע 5×5 גדול ביותר!</b><br>בונוס: הריבוע (לכל היקף נתון, הריבוע נותן שטח מקסימלי בין המלבנים).` },
+                    { kind: 'challenge', title: 'תחנה 4: אתגר', goal: 'תכנון אדריכלי מבוסס אילוצים', time: '15 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>תכנון מבוסס אילוצים</b> — כשנותנים לך תנאי (למשל סה"כ שטח) ועליך למצוא צלעות.</p><ul style="margin-right:22px; line-height:1.9;"><li>פרק את האילוץ לחלקים קטנים.</li><li>בחר שטחים נוחים לחישוב.</li><li>חפש פעולת כפל שמתאימה (מצא צלעות שתואמות).</li></ul>`,
+                      instructions: 'ציירו על משבצות. השתמשו בכל הסוגים: מלבן, ריבוע, משולש.',
+                      mission: `<b>הבית שלכם:</b><br><br>תכננו (ציירו) דירה שיש בה:<br>• 3 חדרים <b>מלבניים</b><br>• סלון אחד בצורת <b>מקבילית או טרפז</b><br><br>סך כל השטח חייב להיות בדיוק <b>100 מ"ר</b>. רשמו צלעות מדויקות לכל חדר וחשבו שטחים.`,
+                      hint: 'התחילו עם שטחי החדרים (למשל 20+20+30+30=100). מצאו צלעות (20=4×5 ; 30=5×6 וכו׳).',
+                      bonus: 'הוסיפו מרפסת משולש (לא נכללת ב-100), חשבו את שטחה.',
+                      solutions: `<b>דוגמת פתרון:</b> חדר 1: 4×5=20. חדר 2: 4×5=20. חדר 3: 5×6=30. סלון מקבילית: בסיס 6, גובה 5 = 30 מ"ר. סה"כ: <b>100 מ"ר</b> ✓<br>בונוס: משולש בסיס 4, גובה 3 = (4×3)÷2 = 6 מ"ר.` }
                 ]
             },
             'word_problems': {
@@ -551,10 +782,34 @@
                 1. מהי "השאלה הנסתרת" שחייבים לחשב לפני שמחשבים את העודף?<br>
                 2. כמה עודף יקבל דני?`,
                 stations: [
-                    { title: "חקר: מה חסר כאן?", goal: "זיהוי נתונים חסרים ועודפים", time: "10 דקות", instructions: "קראו את הסיפורים וקבעו מה חסר כדי לפתור אותם.", mission: `<b>הבלש המתמטי:</b><br>קראו את שתי הבעיות הבאות. באחת אי אפשר לפתור כי חסר נתון, ובשנייה יש נתון מיותר שמבלבל.<br>1️⃣ ליעל היו 50 שקלים. היא קנתה 3 כדורי גלידה לכל החברות שלה וחזרה עם 5 שקלים עודף. כמה עלה כדור גלידה?<br>2️⃣ באוטובוס היו 40 ילדים. בתחנה הראשונה ירדו 5 ילדים ועלו 3 מבוגרים. האוטובוס כחול. כמה נוסעים יש באוטובוס כעת?<br>הסבירו מה חסר בראשונה, ומה מיותר בשנייה.`, hint: `בשאלה 1 - האם אנו יודעים כמה חברות יש ליעל (וכמה כדורים קנתה בסך הכל)?`, bonus: `שנו את שאלה 1 כך שיהיה אפשר לפתור אותה, ופתרו.`, solutions: `בשאלה 1 חסר מספר החברות (כמות כדורי הגלידה שקנתה). בשאלה 2 הצבע של האוטובוס מיותר.` },
-                    { title: "יישום: תקציב הטיול", goal: "פירוק בעיה רב-שלבית לשלבים", time: "15 דקות", instructions: "עבדו לאט. חשבו שלב אחרי שלב, והיעזרו בכותרות קטנות לכל חישוב.", mission: `<b>תכנון הטיול השנתי:</b><br>לשכבה ו' יש תקציב של 1,500 ש"ח לטיול. השכבה קנתה:<br>- 8 אוהלים במחיר 120 ש"ח לאוהל.<br>- 30 בקבוקי מים ב-5 ש"ח לבקבוק.<br>את שאר הכסף החליטו לחלק שווה בשווה בין 5 המדריכים לקניית צ'ופרים לילדים.<br>כמה כסף יקבל כל מדריך?`, hint: `שלב א': מחירי האוהלים. שלב ב': מחירי המים. שלב ג': הוצאה כוללת. שלב ד': חישוב העודף שנשאר מהתקציב. שלב ה': חילוק העודף ב-5.`, bonus: `אם המחיר של אוהל ירד ל-100 ש"ח בעקבות הנחה, איך זה ישפיע על התקציב של כל מדריך?`, solutions: `אוהלים: 960. מים: 150. הוצאה סה"כ: 1110. נשאר מהתקציב: 390. כל מדריך יקבל: 390/5 = 78 ש"ח.` },
-                    { title: "העמקה: ניתוח שגיאות של קריאה", goal: "הבנת הנקרא ושלילת חוסר היגיון", time: "10 דקות", instructions: "קראו את הפתרון השגוי והסבירו מדוע הוא חסר היגיון.", mission: `<b>הטעות של יונתן:</b><br>הבעיה: בספרייה היו 300 ספרים. ביום ראשון הושאלו 45 ספרים, וביום שני הוחזרו 20 ספרים. כמה ספרים יש כעת בספרייה?<br>הפתרון של יונתן: "הושאלו והוחזרו אלו מילים שקשורות לספרים, אז חיברתי הכל: 300 + 45 + 20 = 365 ספרים!"<br>הסבירו ליונתן מדוע התשובה שלו לא הגיונית (מה המשמעות של "הושאלו"?), וכתבו את התרגיל הנכון.`, hint: `כשמשאילים ספר, האם הוא נשאר בספרייה או עוזב אותה? כשמחזירים אותו, האם הוא מתווסף לספרייה?`, bonus: `נסחו כלל מנחה ליונתן לגבי המילים "הוציאו", "קנו", "הוסיפו", "החזירו".`, solutions: `הושאלו פירושו שהספרים יצאו מהספרייה (חיסור). הוחזרו פירושו שחזרו (חיבור). התרגיל הנכון: 300 - 45 + 20 = 275.` },
-                    { title: "רפלקציה ויצירה: חופשה משפחתית", goal: "יצירת בעיה מורכבת מתוך דמיון", time: "15 דקות", instructions: "חברו בעיה ארוכה משלכם. הקפידו על נתונים הגיוניים.", mission: `<b>הסופר הצעיר:</b><br>חברו בעיה מילולית בת 3 שלבים שעוסקת במשפחה שטסה לחו"ל. הבעיה חייבת לכלול:<br>- המרת מטבע או כרטיסי טיסה.<br>- הוצאה מרובה (למשל כמה כרטיסים כפול המחיר).<br>- עודף או חוסר בכסף.<br>פתרו את הבעיה שיצרתם במלואה.<br><b>רפלקציה:</b> מה הופך בעיה מילולית ל"קשה" בעיינכם? המילים המסובכות, הכמות של המספרים, או משהו אחר?`, hint: `התחילו בתקציב כולל גדול (למשל 10,000 ש"ח), החסירו ממנו את הטיסות (4 כרטיסים כפול 1,500), וראו כמה נשאר למלון.`, bonus: `הוסיפו לבעיה שלכם ציור או טבלה שעוזרים לארגן את כל הנתונים.`, solutions: `בדיקה שהבעיה כוללת 3 שלבים הגיוניים ורפלקציה אישית כנה.` }
+                    { kind: 'exercises', title: 'תחנה 1: תרגילים', goal: 'תרגום מילים לפעולות חישוב', time: '12 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>מילות מפתח → פעולות:</b></p><ul style="margin-right:22px; line-height:1.9;"><li>"ביחד / סה"כ / הוסיפו" = <b>+</b></li><li>"נשאר / הוציאו / פחות" = <b>−</b></li><li>"פי / כל אחד / קיבוצים שווים" = <b>×</b></li><li>"חילקו / לכל / ביחס" = <b>÷</b></li></ul><p style="margin-top:10px; font-size:1.05rem;">💡 בבעיה רב-שלבית — יש "שאלה נסתרת" שצריך לחשב לפני התשובה הסופית.</p>`,
+                      instructions: 'תרגמו כל בעיה לתרגיל ופתרו.',
+                      mission: `<b>פתרו:</b><br>1) 28 תלמידים בחילוק ל-4 קבוצות. כמה בקבוצה?<br>2) 3 מחברות ב-15 ש"ח כל אחת. כמה סה"כ?<br>3) 6.5 ק"ג × 3.50 ש"ח לק"ג. כמה לשלם?<br>4) 1.2 ק"מ הלוך-חזור. כמה מטרים סה"כ?<br>5) משולש 3 צלעות בני 8, 8, 12 ס"מ. היקף?`,
+                      hint: 'חילוק = ÷. כפל = ×. הלוך-חזור = × 2. היקף = סכום צלעות.',
+                      bonus: 'כיתה של 30 תלמידים מחולקת לקבוצות של 6. כמה קבוצות?',
+                      solutions: `1) <b>7</b> בקבוצה<br>2) <b>45 ש"ח</b><br>3) <b>22.75 ש"ח</b><br>4) 1.2 ק"מ = 1200 מ׳ × 2 = <b>2400 מ׳</b><br>5) <b>28 ס"מ</b><br>בונוס: 30÷6 = <b>5 קבוצות</b>` },
+                    { kind: 'word_problems', title: 'תחנה 2: בעיות מילוליות', goal: 'פתרון בעיות רב-שלביות', time: '15 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>בעיה רב-שלבית — 4 צעדים:</b></p><ol style="margin-right:22px; line-height:1.9;"><li><b>קוראים פעמיים</b>, מסמנים נתונים.</li><li><b>מזהים את השאלה</b> — מה צריך למצוא?</li><li><b>מחפשים שאלה נסתרת</b> — מה צריך לחשב <b>בדרך</b>?</li><li><b>פותרים שלב-אחר-שלב</b> ובודקים הגיון.</li></ol>`,
+                      instructions: 'עבדו לאט. רשמו כותרות לכל שלב חישוב.',
+                      mission: `<b>בעיה 1:</b> 3 מחברות ב-15 ש"ח כל אחת ו-2 עפרונות ב-5 ש"ח. שילם 100 ש"ח. כמה עודף?<br><br><b>בעיה 2:</b> תקציב טיול 1,500 ש"ח. קנו 8 אוהלים ב-120 ש"ח ו-30 בקבוקי מים ב-5 ש"ח. את היתרה חלקו שווה בין 5 מדריכים. כמה לכל מדריך?<br><br><b>בעיה 3:</b> מיכל קנתה 3 שמלות ב-80 ש"ח עם 20% הנחה. כמה שילמה?`,
+                      hint: 'בעיה 1 — קודם סה"כ הוצאה. בעיה 2 — אוהלים+מים, אז 1500−הוצאה, אז ÷5. בעיה 3 — מחיר אחרי הנחה ואז ×3.',
+                      bonus: 'בבעיה 2 — אם מחיר אוהל ירד ל-100 ש"ח, איך משתנה התקציב לכל מדריך?',
+                      solutions: `1) 3×15+2×5 = 45+10 = 55. עודף: <b>45 ש"ח</b>.<br>2) אוהלים: 8×120=960. מים: 30×5=150. סה"כ: 1110. נשאר: 390. כל מדריך: 390÷5 = <b>78 ש"ח</b>.<br>3) אחרי הנחה: 80×0.8=64. סה"כ: 3×64 = <b>192 ש"ח</b>.<br>בונוס: אוהלים 800, סה"כ 950, נשאר 550, כל מדריך 110 ש"ח (+32).` },
+                    { kind: 'conclusion', title: 'תחנה 3: 3 תרגילי הסקת מסקנות', goal: 'איתור נתון חסר/מיותר, ניתוח טעות, הבנת הקשר', time: '12 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>בעיות מילוליות לעתים מבלבלות:</b></p><ul style="margin-right:22px; line-height:1.9;"><li><b>חסר נתון:</b> אי אפשר לפתור — חסרה מידע.</li><li><b>נתון מיותר:</b> מובא להסחה, לא משפיע.</li><li><b>קריאה שגויה:</b> תלמיד הבין הפוך, מה המשמעות האמיתית?</li></ul>`,
+                      instructions: 'פתרו 3 תרגילים — לכל אחד הסבירו בכתב!',
+                      mission: `<b>1) חסר נתון:</b> ליעל היו 50 ש"ח. קנתה 3 כדורי גלידה לכל החברות שלה. נשארו 5 ש"ח. כמה עלה כדור? מה חסר כדי לפתור?<br><br><b>2) נתון מיותר:</b> באוטובוס 40 ילדים. ירדו 5 ילדים ועלו 3 מבוגרים. האוטובוס כחול. כמה נוסעים יש כעת? מה מיותר?<br><br><b>3) ניתוח טעות:</b> בעיה: "בספרייה 300 ספרים. הושאלו 45, הוחזרו 20. כמה יש?". יונתן חישב: 300+45+20=365. הסבירו את הטעות.`,
+                      hint: 'בעיה 1 — צריך מספר חברות. בעיה 2 — צבע = חסר חשיבות. בעיה 3 — "הושאל" = יצא, "הוחזר" = חזר.',
+                      bonus: 'הוסיפו לבעיה 1 נתון חסר ופתרו אותה.',
+                      solutions: `<b>1)</b> חסר <b>מספר החברות</b>. אם נניח 3 חברות: סה"כ 9 כדורים. (50−5)÷9 = 5 ש"ח לכדור.<br><b>2)</b> מיותר: <b>צבע האוטובוס</b>. תשובה: 40−5+3 = <b>38 נוסעים</b>.<br><b>3)</b> "הושאלו" = יצאו (חיסור), "הוחזרו" = חזרו (חיבור). נכון: 300−45+20 = <b>275</b>.<br>בונוס: ל-3 חברות: 5 ש"ח כל כדור.` },
+                    { kind: 'challenge', title: 'תחנה 4: אתגר', goal: 'יצירת בעיה מקורית רב-שלבית', time: '15 דקות',
+                      learn: `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4><p style="line-height:1.75; font-size:1.05rem;"><b>איך כותבים בעיה מילולית טובה?</b></p><ul style="margin-right:22px; line-height:1.9;"><li>הקשר מהחיים שכולם מבינים.</li><li>נתונים הגיוניים (לא מספר מטורף).</li><li>לפחות 2 שלבי חישוב.</li><li>השאלה ברורה.</li></ul>`,
+                      instructions: 'אתם הסופרים! חברו בעיה ופתרו אותה במלואה.',
+                      mission: `<b>הסופר הצעיר:</b><br><br>חברו בעיה מילולית בת <b>3 שלבים</b> בנושא חופשה משפחתית. הבעיה חייבת לכלול:<br>• <b>כרטיסי טיסה</b> או המרת מטבע.<br>• <b>הוצאה מרובה</b> (כמה × מחיר).<br>• <b>שאלה על עודף או חוסר בכסף</b>.<br><br>פתרו את הבעיה שיצרתם!`,
+                      hint: 'התחילו בתקציב גדול (10,000 ש"ח). חסרו טיסות (4 כרטיסים × 1,500). מה נשאר למלון?',
+                      bonus: 'הוסיפו לבעיה ציור או טבלה שמארגנים את הנתונים.',
+                      solutions: `<b>דוגמת פתרון:</b> "משפחה של 4 טסה ליוון. כרטיס: 1,500 ש"ח. מלון: 350 ש"ח ללילה × 5 לילות. תקציב: 12,000 ש"ח. כמה כסף נשאר לקניות?"<br>• טיסות: 4×1500=6000<br>• מלון: 5×350=1750<br>• סה"כ הוצאה: 7750<br>• <b>נשאר לקניות: 4,250 ש"ח</b>` }
                 ]
             }
         };
@@ -597,33 +852,44 @@
                 { q: `אתגר יצירה: חברו בעיה מילולית הכוללת לפחות שתי פעולות חישוב, מתוך הקשר של ${topic}. פתרו אותה במלואה.`, a: 'תשובה אישית — בדיקה: יש שני שלבי חישוב, נתונים הגיוניים, פתרון מתמטית נכון.' }
             ];
 
-            const templates = [
-                {
-                    lessonPlan: genericLessonPlan,
-                    practiceSheet: genericPracticeSheet,
-                    scaffold: `<b>💡 אסטרטגיות חשיבה בנושא: ${topic}</b><br><br>1. קראו כל בעיה פעמיים כדי להבין את ההקשר של ${topic}.<br>2. שרטוט או סקיצה הם הכלים החשובים ביותר שלכם.<br>3. הפעילו בקרה עצמית - האם התוצאה הגיונית?`,
-                    exitTicket: `<b>📝 בוחנים הבנה ב${topic}:</b><br><br>1. נסחו כלל חשוב שלמדתם היום.<br>2. חברו בעיה שבה התשובה היא בדיוק 12.`,
-                    stations: [
-                        { title: `חקר: תעלומת ה${topic}`, goal: `הפרכת טענות שגויות`, time: `12 דקות`, instructions: `נתחו את הסוגיה והוכיחו בעזרת מסקנות מתמטיות.`, mission: `תלמיד טען היום ש: "בכל פעם שפותרים תרגילים של ${topic}, המספר הסופי תמיד גדל".<br>האם הוא צודק? הביאו <b>דוגמה מפריכה</b> (המוכיחה טעות) או <b>דוגמה תומכת</b>.`, hint: `נסו לחשוב על מקרי קיצון.`, bonus: `נסחו הכללה משלכם.`, solutions: `יצירת דוגמה קונקרטית מנומקת.` },
-                        { title: `יישום: ${topic} בעולם האמיתי`, goal: `תרגום טקסט לתרגיל רב-שלבי`, time: `15 דקות`, instructions: `בנו בעיה משלכם ופתרו אותה.`, mission: `חברת הייטק מפתחת אלגוריתם המבוסס על ${topic}. עליכם לבנות עבורם בעיה מילולית בת 2 שלבים מחיי היומיום, ולפתור אותה באופן מלא כמודל.`, hint: `ודאו שהבעיה שבניתם דורשת לפחות שתי פעולות שונות.`, bonus: `פתרו את הבעיה בעזרת תרגיל ארוך אחד.`, solutions: `בעיה רב-שלבית קשורה לנושא ופתורה נכון.` },
-                        { title: `העמקה: ניתוח שגיאות`, goal: `איתור כשל לוגי ותיקון`, time: `10 דקות`, instructions: `אתרו את הטעות, הסבירו ותקנו.`, mission: `במבחן בנושא ${topic}, תלמיד דילג על שלב קריטי וטעה.<br>מהי הטעות הנפוצה ביותר בנושא זה? כתבו "פתרון שגוי" לדוגמה שמדגים אותה, ולצידו פתרון נכון.`, hint: `איפה אתם התבלבלתם כשלמדתם זאת לראשונה?`, bonus: `ציירו סמיילי עם טיפ קצר נגד הטעות.`, solutions: `אבחון עצמי ושליטה במושגים.` },
-                        { title: `רפלקציה: מפה מושגית ל${topic}`, goal: `ארגון הידע ויצירת הקשרים`, time: `10 דקות`, instructions: `סכמו את הלמידה באופן חזותי.`, mission: `1️⃣ ציירו "מפת מושגים" לסיכום הכללים והטיפים שלמדתם ב${topic}.<br>2️⃣ <b>שאלה אישית:</b> מהו החלק שאתם מרגישים בו הכי בטוחים?`, hint: `מפת מושגים טובה מכילה מילות קישור.`, bonus: `הוסיפו צבעים לאבחנה בין כללים לאזהרות.`, solutions: `מפה הכוללת 4 מונחים ורפלקציה כנה.` }
-                    ]
-                },
-                {
-                    lessonPlan: genericLessonPlan,
-                    practiceSheet: genericPracticeSheet,
-                    scaffold: `<b>💡 טיפים ללמידה על: ${topic}</b><br><br>1. חפשו את התבניות: האם המספרים חוזרים על עצמם?<br>2. השתמשו בדמיון: נסו להמציא סיפור קטן על המספרים.<br>3. בדקו שוב את החישוב האחרון!`,
-                    exitTicket: `<b>📝 מבדק מהיר ב${topic}:</b><br><br>1. מה היה הדבר הכי מפתיע שלמדתם?<br>2. פתרו תרגיל אחד קשה במיוחד לבחירתכם, והסבירו את הדרך.`,
-                    stations: [
-                        { title: `חקר: יצירת משחק ${topic}`, goal: `הבנת החוקיות המרכזית`, time: `15 דקות`, instructions: `המציאו חוקים חדשים למשחק מתמטי.`, mission: `תכננו משחק קלפים קצר (או משחק קוביות) שדורש ידע מעמיק ב${topic} כדי לנצח.<br>הסבירו את 3 החוקים המרכזיים של המשחק, ותנו דוגמה ל"מהלך מנצח".`, hint: `חשבו איך משלבים שאלות חישוב או יצירת השוואות במשחק שלכם.`, bonus: `עצבו שער (ציור) לקופסת המשחק שלכם.`, solutions: `בדיקה של יצירתיות ושילוב מושגים מתמטיים אמיתיים במשחק.` },
-                        { title: `יישום: חילוץ נתונים`, goal: `הפרדת עיקר מטפל`, time: `10 דקות`, instructions: `התעלמו ממה שלא חשוב!`, mission: `בנו פסקה ארוכה (מינימום 4 משפטים) שמספרת סיפור מרתק. בתוך הסיפור, החביאו 3 מספרים שרק הם קשורים לחישוב של ${topic}, והרבה מספרים מיותרים להסחה.<br>לאחר מכן, חלצו בעצמכם את התרגיל הנכון ופתרו.`, hint: `מספרים להסחה יכולים להיות גיל, מספרי רחוב, צבעים וכו'.`, bonus: `תנו את הסיפור שלכם לחבר וראו אם הוא מצליח לא לטעות במספרים המיותרים.`, solutions: `יכולת בנייה של בעיה עם עודפות נתונים.` },
-                        { title: `העמקה: התרגיל השבור`, goal: `שחזור אלגוריתם חסר`, time: `12 דקות`, instructions: `שחזרו את השלבים שנמחקו.`, mission: `מישהו שפך קפה על מחברת החשבון. בתרגיל העוסק ב${topic}, נמחקו כל סימני הפעולות (+, -, ×, ÷) וכל המספרים האמצעיים - רואים רק את מספר ההתחלה, ואת התשובה הסופית.<br>בחרו מספר התחלה, בחרו תוצאה סופית, ונסו להמציא שני מסלולים שונים (שני תרגילים שונים) שמובילים אליה תוך שימוש בחוקי ${topic}.`, hint: `עבדו מהסוף להתחלה!`, bonus: `האם מצאתם מסלול הכולל 3 פעולות שונות?`, solutions: `הצגת שני תרגילים תקינים עם תוצאות זהות.` },
-                        { title: `רפלקציה: שיחת סיכום`, goal: `חשיבה רפלקטיבית`, time: `10 דקות`, instructions: `נהלו שיחה עם עצמכם.`, mission: `כתבו "ראיון" קצר של 4 שורות ביניכם לבין "כתב טלוויזיה" ששואל אתכם על החוויה שלכם בלמידת ${topic}.<br>הכתב: מה היה הרגע שבו הבנת איך זה עובד?<br>אתם: [השלימו].`, hint: `דמיינו שאתם באמת מסבירים למישהו שלא היה איתכם בכיתה.`, bonus: `הוסיפו שאלה אחת קשה שהכתב שואל אתכם על החומר!`, solutions: `ראיון עשיר שמדגים מטא-קוגניציה.` }
-                    ]
-                }
-            ];
-            return templates[Math.floor(Math.random() * templates.length)];
+            // תבנית חכמה לנושאי תוכנית-לימודים שאין להם בנק עשיר ייעודי
+            const learnPrefix = `<h4 style="color:#0f766e; font-weight:900; font-size:1.15rem; margin-bottom:10px;">📚 כרטיס לימוד עצמאי</h4>`;
+            return {
+                lessonPlan: genericLessonPlan,
+                practiceSheet: genericPracticeSheet,
+                scaffold: `<b>💡 אסטרטגיות חשיבה ב${topic}:</b><br><br>1. קראו והבינו את הנושא — מה השאלה שואלת?<br>2. שרטוט/ייצוג חזותי הוא הכלי הטוב ביותר.<br>3. בדקו בכל שלב — האם התוצאה הגיונית?<br>4. הסבירו לעצמכם בקול את הצעד הבא לפני שעושים אותו.`,
+                exitTicket: `<b>📝 מבדק קצר ב${topic}:</b><br><br>1. הסבירו במילים שלכם 2 מושגים מרכזיים שלמדתם.<br>2. פתרו תרגיל אחד מסוג שלמדתם, והסבירו את הדרך.<br>3. תנו דוגמה מחיי היומיום שקשורה ל${topic}.`,
+                stations: [
+                    { kind: 'exercises', title: 'תחנה 1: תרגילים', goal: `שליטה בסיסית בנושא ${topic}`, time: '12 דקות',
+                      learn: `${learnPrefix}<p style="line-height:1.75; font-size:1.05rem;"><b>תחנת תרגילים — איך לעבוד?</b></p><ol style="margin-right:22px; line-height:1.9;"><li><b>קראו את הכלל</b> שהמורה לימדה (במחברת או בספר).</li><li><b>תרגלו דוגמה</b> אחת ביחד עם הכלל.</li><li><b>פתרו לבד</b> את התרגילים.</li><li><b>בדקו בעצמכם</b> בדף הפתרונות בסיום.</li></ol><p style="margin-top:10px; font-size:1.05rem;">💡 אם נתקעים — חזרו לדוגמה. אל תוותרו!</p>`,
+                      instructions: 'פתרו את 4 התרגילים על-פי הכללים שלמדתם בנושא.',
+                      mission: `<b>פתרו 4 תרגילים בסיסיים בנושא "${topic}":</b><br><br>1) תרגיל מתחיל — לפי דוגמה במחברת.<br>2) תרגיל דומה — שינוי מספרים.<br>3) תרגיל בינוני — צריך שני שלבים.<br>4) תרגיל מתקדם — שילוב של שני כללים.<br><br><i>(התרגילים המדויקים נכתבים על הלוח על-ידי המורה לפי השיעור)</i>`,
+                      hint: 'התחילו מהקל. אם נתקעים — בדקו דוגמה במחברת.',
+                      bonus: 'פתרו תרגיל נוסף בעצמכם, מאותו סוג.',
+                      solutions: 'בדקו עם המורה / בדף התשובות הכיתתי. בדיקה: כל תרגיל פתרון מנומק.' },
+                    { kind: 'word_problems', title: 'תחנה 2: בעיות מילוליות', goal: `יישום ${topic} בחיי היומיום`, time: '15 דקות',
+                      learn: `${learnPrefix}<p style="line-height:1.75; font-size:1.05rem;"><b>איך פותרים בעיה מילולית?</b></p><ol style="margin-right:22px; line-height:1.9;"><li><b>קראו פעמיים.</b></li><li><b>סמנו נתונים</b> ומה שואלים.</li><li><b>תרגמו מילים לפעולה.</b></li><li><b>פתרו ובדקו.</b></li></ol>`,
+                      instructions: 'קראו, סמנו, פתרו במחברת.',
+                      mission: `<b>בעיה 1:</b> בעיה מהחיים הקשורה ל-${topic}, עם 2 נתונים ושאלה אחת.<br><br><b>בעיה 2:</b> בעיה דומה אך עם 3 נתונים.<br><br><b>בעיה 3 (רב-שלבית):</b> בעיה שמחייבת לחשב משהו "באמצע" לפני שעונים.<br><br><i>המורה תכתוב את הבעיות המדויקות לפי השיעור.</i>`,
+                      hint: 'הפכו מילים לפעולות. "ביחד" = +. "נשאר" = −. "פי" = ×.',
+                      bonus: 'חברו בעיה משלכם.',
+                      solutions: 'בדיקה: כל בעיה נפתרת עם תרגיל ברור ותשובה הגיונית.' },
+                    { kind: 'conclusion', title: 'תחנה 3: 3 תרגילי הסקת מסקנות', goal: `חשיבה ביקורתית בנושא ${topic}`, time: '12 דקות',
+                      learn: `${learnPrefix}<p style="line-height:1.75; font-size:1.05rem;"><b>הסקת מסקנות = חשיבה גבוהה!</b></p><ul style="margin-right:22px; line-height:1.9;"><li>🔍 <b>השוואה:</b> מה גדול יותר ולמה?</li><li>🐛 <b>איתור טעות:</b> איפה התלמיד טעה?</li><li>📋 <b>הכללה:</b> מה הכלל הכללי?</li></ul><p style="margin-top:10px; font-size:1.05rem;">💡 חשוב <b>להסביר בכתב</b>, לא רק לתת תשובה.</p>`,
+                      instructions: 'פתרו 3 תרגילים — לכל אחד הסבר בכתב.',
+                      mission: `<b>1) השוואה:</b> ניתנים שני מקרים בנושא ${topic} — מי גדול יותר/נכון יותר? הסבירו בעזרת מתמטיקה.<br><br><b>2) איתור טעות:</b> תלמיד פתר תרגיל בנושא ${topic} וטעה. מצאו את הטעות, הסבירו, ופתרו נכון.<br><br><b>3) הכללה:</b> בדקו טענה כללית בנושא — האם תמיד נכונה? תנו דוגמה תומכת ודוגמה נגדית.`,
+                      hint: 'אל תקפצו לתשובה — הסבירו את ההיגיון בכל שלב.',
+                      bonus: 'נסחו כלל משלכם בעקבות מה שלמדתם.',
+                      solutions: 'בדיקה: לכל אחד יש הסבר ולא רק תוצאה.' },
+                    { kind: 'challenge', title: 'תחנה 4: אתגר', goal: `חשיבה יצירתית ומסדר גבוה`, time: '15 דקות',
+                      learn: `${learnPrefix}<p style="line-height:1.75; font-size:1.05rem;"><b>אתגר = לימוד עמוק!</b></p><ul style="margin-right:22px; line-height:1.9;"><li>נסו <b>מקרה פשוט</b> ראשון.</li><li>חפשו <b>תבנית</b>.</li><li><b>הסבירו בכתב</b> את הדרך.</li><li>אל תפחדו לטעות — זה חלק מהלמידה!</li></ul>`,
+                      instructions: 'נסו כמה פתרונות שונים. אין תשובה אחת!',
+                      mission: `<b>אתגר יצירה:</b><br><br>חברו בעצמכם <b>בעיה מקורית</b> בנושא ${topic} שיש בה:<br>• לפחות 2 פעולות חישוב<br>• הקשר מחיי היומיום<br>• שאלה ברורה<br><br>פתרו את הבעיה שלכם ובדקו שההיגיון תקין. החליפו עם חבר/ה ופתרו את שלהם!`,
+                      hint: 'התחילו מבעיה שכבר ראיתם, ושנו נתון אחד. זה מספיק כדי ליצור משהו חדש.',
+                      bonus: 'הוסיפו ציור או טבלה לבעיה שלכם.',
+                      solutions: 'בדיקה: יש 2+ שלבי חישוב, נתונים הגיוניים, פתרון תקין. החליפו עם חבר ובחנו זה את זה.' }
+                ]
+            };
         }
 
         /* ──────── מצב ──────── */
@@ -1002,40 +1268,44 @@
             AppState.stations.forEach((station, index) => {
                 const html = `
                     <div class="bg-white rounded-3xl border-2 border-slate-200 p-8 md:p-10 shadow-lg relative print-card" id="station-card-${index}">
-                        <div class="flex items-center justify-between border-b-2 border-slate-100 pb-5 mb-6">
+                        <div class="flex items-center justify-between border-b-2 border-teal-100 pb-5 mb-6 gap-4 flex-wrap">
                             <div class="flex items-center gap-4 flex-grow">
-                                <span class="w-12 h-12 rounded-full bg-teal-100 text-teal-800 font-black flex items-center justify-center text-xl">
+                                <span class="w-16 h-16 rounded-full bg-gradient-to-br from-teal-500 to-emerald-600 text-white font-black flex items-center justify-center text-3xl shadow-md">
                                     ${index + 1}
                                 </span>
                                 <div>
-                                    <h4 class="text-2xl font-black text-slate-800 outline-none hover:bg-slate-50 transition rounded" contenteditable="true" onblur="AppState.stations[${index}].title=this.innerText; updateTracker();">${station.title}</h4>
-                                    <span class="text-sm font-black bg-slate-100 text-slate-600 px-3 py-1 rounded-full mt-2 inline-block outline-none hover:bg-slate-200 transition" contenteditable="true" onblur="AppState.stations[${index}].goal=this.innerText">${station.goal}</span>
+                                    <h4 class="text-3xl md:text-4xl font-black text-slate-900 outline-none hover:bg-slate-50 transition rounded leading-tight" contenteditable="true" onblur="AppState.stations[${index}].title=this.innerText; updateTracker();">${station.title}</h4>
+                                    <span class="text-base font-bold bg-teal-100 text-teal-800 px-4 py-1.5 rounded-full mt-2 inline-block outline-none hover:bg-teal-200 transition" contenteditable="true" onblur="AppState.stations[${index}].goal=this.innerText">🎯 ${station.goal}</span>
                                 </div>
                             </div>
-                            <div class="text-slate-500 font-bold bg-slate-50 px-4 py-2 rounded-xl flex items-center gap-2">
+                            <div class="text-slate-700 font-black bg-amber-50 border-2 border-amber-200 px-5 py-3 rounded-xl flex items-center gap-2 text-lg">
                                 ⏳ <span contenteditable="true" class="outline-none" onblur="AppState.stations[${index}].time=this.innerText; updateTracker();">${station.time}</span>
                             </div>
                         </div>
 
                         <div class="space-y-6">
-                            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200">
-                                <h5 class="font-black text-slate-800 text-lg mb-2">📋 הוראות ללומד העצמאי:</h5>
-                                <div class="text-slate-700 text-lg outline-none hover:bg-white p-2 transition rounded" contenteditable="true" onblur="AppState.stations[${index}].instructions=this.innerHTML">${station.instructions}</div>
+                            ${station.learn ? `<div class="bg-gradient-to-l from-teal-50 to-emerald-50 rounded-2xl p-6 border-2 border-teal-200 shadow-sm">
+                                <div class="text-slate-800 text-lg leading-relaxed outline-none hover:bg-white p-2 transition rounded" contenteditable="true" onblur="AppState.stations[${index}].learn=this.innerHTML">${station.learn}</div>
+                            </div>` : ''}
+
+                            <div class="bg-slate-50 rounded-2xl p-6 border-2 border-slate-200">
+                                <h5 class="font-black text-slate-800 text-xl mb-3">📋 הוראות ללומד העצמאי:</h5>
+                                <div class="text-slate-700 text-lg leading-relaxed outline-none hover:bg-white p-2 transition rounded" contenteditable="true" onblur="AppState.stations[${index}].instructions=this.innerHTML">${station.instructions}</div>
                             </div>
 
-                            <div class="bg-white rounded-2xl p-6 border-2 border-dashed border-teal-300">
-                                <h5 class="font-black text-teal-900 text-xl mb-4">🎯 המשימה לביצוע:</h5>
-                                <div class="text-slate-900 text-xl leading-loose outline-none hover:bg-slate-50 p-2 transition rounded" contenteditable="true" onblur="AppState.stations[${index}].mission=this.innerHTML">${station.mission}</div>
+                            <div class="bg-gradient-to-l from-teal-50 to-white rounded-2xl p-7 border-2 border-dashed border-teal-400 shadow-sm">
+                                <h5 class="font-black text-teal-900 text-2xl mb-4">🎯 המשימה לביצוע:</h5>
+                                <div class="text-slate-900 text-xl md:text-2xl leading-loose outline-none hover:bg-white p-3 transition rounded" contenteditable="true" onblur="AppState.stations[${index}].mission=this.innerHTML">${station.mission}</div>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="bg-yellow-50 rounded-2xl p-5 border border-yellow-200">
-                                    <h5 class="font-black text-yellow-800 mb-2">💡 גלגל הצלה (רמז לתלמיד):</h5>
-                                    <div class="text-yellow-900 outline-none hover:bg-white p-2 rounded" contenteditable="true" onblur="AppState.stations[${index}].hint=this.innerHTML">${station.hint}</div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div class="bg-yellow-50 rounded-2xl p-5 border-2 border-yellow-300">
+                                    <h5 class="font-black text-yellow-800 text-lg mb-2">💡 רמז ללומד:</h5>
+                                    <div class="text-yellow-900 text-base leading-relaxed outline-none hover:bg-white p-2 rounded" contenteditable="true" onblur="AppState.stations[${index}].hint=this.innerHTML">${station.hint}</div>
                                 </div>
-                                <div class="bg-purple-50 rounded-2xl p-5 border border-purple-200">
-                                    <h5 class="font-black text-purple-800 mb-2">🚀 אתגר בונוס למסיימים:</h5>
-                                    <div class="text-purple-900 outline-none hover:bg-white p-2 rounded" contenteditable="true" onblur="AppState.stations[${index}].bonus=this.innerHTML">${station.bonus}</div>
+                                <div class="bg-purple-50 rounded-2xl p-5 border-2 border-purple-300">
+                                    <h5 class="font-black text-purple-800 text-lg mb-2">🚀 בונוס למסיימים:</h5>
+                                    <div class="text-purple-900 text-base leading-relaxed outline-none hover:bg-white p-2 rounded" contenteditable="true" onblur="AppState.stations[${index}].bonus=this.innerHTML">${station.bonus}</div>
                                 </div>
                             </div>
 
@@ -1129,6 +1399,7 @@
                             <h2>תחנה ${index + 1}: ${s.title}</h2>
                             <span class="level-badge">⏳ זמן מומלץ: ${s.time} | 🎯 מטרה: ${s.goal}</span>
                         </div>
+                        ${s.learn ? `<div class="learn-box">${s.learn}</div>` : ''}
                         <div class="instructions"><strong>הוראות עבודה:</strong> ${s.instructions}</div>
                         <div class="mission-box">
                             <strong>המשימה:</strong><br>
@@ -1193,6 +1464,8 @@
                     .hint-box { flex: 1; border: 2px solid #fbbf24; background-color: #fefce8; border-radius: 8px; padding: 15px; font-size: 12pt; color: #854d0e; }
                     .bonus-box { flex: 1; border: 2px solid #c084fc; background-color: #faf5ff; border-radius: 8px; padding: 15px; font-size: 12pt; color: #6b21a8; }
                     .rubric-box { border-top: 2px solid #e2e8f0; margin-top: 20px; padding-top: 15px; font-size: 14pt; font-weight: bold; color: #334155; }
+                    .learn-box { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 2px solid #14b8a6; border-radius: 12px; padding: 20px 25px; margin-bottom: 18px; font-size: 14pt; line-height: 1.7; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                    .learn-box h4 { color: #0f766e; font-size: 17pt; margin-bottom: 10px; }
                     .ws-q-row { display: grid; grid-template-columns: 36px 1fr; gap: 10px; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 8px; page-break-inside: avoid; }
                     .ws-q-num { background: #6d28d9; color: #fff; width: 30px; height: 30px; line-height: 30px; text-align: center; border-radius: 50%; font-weight: 900; }
                     .ws-ans-line { margin-top: 10px; border-bottom: 1.5px solid #94a3b8; height: 20px; }
