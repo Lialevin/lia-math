@@ -1456,50 +1456,103 @@
             `;
         }
 
-        /* ──────── כרטיסי ניווט ללמידה עצמאית ──────── */
+        /* ──────── כרטיסי ניווט ללמידה עצמאית — מבוסס תוכן ──────── */
+        function previewFromMission(mission) {
+            // לוקח את תחילת המשימה כתצוגה מקדימה (קצרה, ללא HTML)
+            const text = (mission || '').replace(/<br\s*\/?>/gi,' · ').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+            return text.length > 160 ? text.slice(0, 160) + '…' : text;
+        }
+        function kindMetadata(kind) {
+            const map = {
+                'exercises': {
+                    label: '🔢 תחנת תרגול חישובים',
+                    preview: 'בתחנה הזו תפגשו 5 תרגילים. הם בנויים מהקל לקשה. <b>אל תקפצו</b> — תחילה התרגיל הראשון, ואז תוסיפו רמת קושי.',
+                    strategy: '<b>איך לגשת לתרגיל?</b><ol style="margin-right:22px; line-height:1.85;"><li><b>קראו את הכלל</b> שמופיע בכרטיס הזה למעלה.</li><li><b>זהו את סוג התרגיל</b>: חיבור, חיסור, כפל, חילוק, השלמת חסר?</li><li><b>החליטו אסטרטגיה</b>: בעל פה, בעמודות, בעזרת עיגול?</li><li><b>פתרו וכתבו כל שלב</b> — לא רק את התשובה.</li></ol>',
+                    mistakes: '<b>טעויות נפוצות בתרגול:</b><ul style="margin-right:22px; line-height:1.85;"><li>שכחת נשיאה/פריטה בחישוב במאונך.</li><li>לבלוץ סדר פעולות (כפל לפני חיבור!).</li><li>תשובה בלי בדיקה — חזרו תמיד עם פעולה הפוכה.</li></ul>',
+                    miniCheck: '<b>שאלת חימום:</b> כמה זה <span class="math-ltr">12 + 8</span>? (תשובה: 20). אם הצלחתם — מצוין, אתם מוכנים!'
+                },
+                'word_problems': {
+                    label: '📖 תחנת בעיות מילוליות',
+                    preview: 'בתחנה הזו תפגשו <b>3 בעיות מהחיים</b>. בעיה 1 — פשוטה. בעיה 2 — בינונית. <b>בעיה 3 — רב-שלבית!</b> צריך לחשב משהו "באמצע" לפני התשובה הסופית.',
+                    strategy: '<b>אסטרטגיית 4 שלבים לכל בעיה:</b><ol style="margin-right:22px; line-height:1.85;"><li><b>קראו פעמיים</b> — פעם להבין, פעם לסמן.</li><li><b>סמנו נתונים</b> (במרקר/קו) ואת השאלה.</li><li><b>תרגמו מילים לפעולות</b>: "ביחד / קיבל / סה"כ" = + · "נשאר / יצא / נתן" = − · "פי / לכל" = × · "חילקו שווה" = ÷</li><li><b>פתרו, בדקו, ענו במשפט מלא</b>.</li></ol>',
+                    mistakes: '<b>טעויות נפוצות בבעיות:</b><ul style="margin-right:22px; line-height:1.85;"><li>קופצים לחישוב לפני שמבינים מה שואלים.</li><li>שוכחים את <b>השאלה הנסתרת</b> בבעיה רב-שלבית.</li><li>עונים מספר בלי משפט הסבר (התרגיל הסיים — צריך גם תשובה במילים).</li></ul>',
+                    miniCheck: '<b>בדיקה עצמית:</b> בבעיה "אבא קנה 3 ספרים ב-20 ש"ח ושילם 100" — מה השאלה הנסתרת? (כמה עלו הספרים יחד — לפני העודף).'
+                },
+                'conclusion': {
+                    label: '🔍 תחנת הסקת מסקנות',
+                    preview: 'בתחנה הזו תפגשו <b>3 שאלות מסוג שונה</b>: השוואה, איתור טעות, והכללה. <b>כל שאלה דורשת הסבר בכתב — לא רק תשובה!</b>',
+                    strategy: '<b>איך לכתוב הסבר טוב?</b><ol style="margin-right:22px; line-height:1.85;"><li><b>השוואה:</b> חשבו את שני האגפים בנפרד, ואז ציינו את ההפרש במספר ובמילים.</li><li><b>איתור טעות:</b> בדקו <b>איפה בדיוק</b> נכשל התלמיד. הסבירו את הכלל שהוא שכח.</li><li><b>הכללה:</b> נסחו את הכלל ב-1-2 משפטים, ותנו 2 דוגמאות שתומכות בו.</li></ol>',
+                    mistakes: '<b>טעויות נפוצות בהסקה:</b><ul style="margin-right:22px; line-height:1.85;"><li>תשובה "כן/לא" בלי הסבר.</li><li>"זה ככה כי המורה אמרה" — לא הסבר מתמטי!</li><li>איתור טעות בלי לפתור נכון את התרגיל המקורי.</li></ul>',
+                    miniCheck: '<b>בדיקה עצמית:</b> איזה גדול יותר: <span class="math-ltr">12 × 5</span> או <span class="math-ltr">8 × 7</span>? נמקו במשפט. (12×5=60 ; 8×7=56 ; 12×5 גדול ב-4.)'
+                },
+                'challenge': {
+                    label: '🏆 תחנת אתגר',
+                    preview: 'תחנה אחרונה — אתגר אמיתי! <b>לרוב יש כמה פתרונות נכונים</b>. נסו לפחות 2-3 דרכים.',
+                    strategy: '<b>איך לפצח אתגר?</b><ol style="margin-right:22px; line-height:1.85;"><li><b>נסו מקרה פשוט</b> — דוגמה אחת. הצלחה? מצוין.</li><li><b>חפשו תבנית</b> — אם מצאתם פתרון אחד, יש כנראה עוד.</li><li><b>שאלו "מה אם..."</b> — מה אם הוסיפו מספר? הקטינו? שינו פעולה?</li><li><b>הסבירו בכתב</b> את הדרך — לא רק את התשובה.</li></ol>',
+                    mistakes: '<b>טעויות נפוצות באתגר:</b><ul style="margin-right:22px; line-height:1.85;"><li>מוותרים מהר מדי. אתגר אמור להיות קשה!</li><li>מוצאים פתרון אחד ועוצרים — חיפשו אחר עוד.</li><li>פתרון בלי הסבר — לא יתקבל.</li></ul>',
+                    miniCheck: '<b>חימום:</b> מצאו 2 דרכים לקבל 12: 3+9 ; 4×3 ; 24÷2 ; 20−8. כולן נכונות!'
+                }
+            };
+            return map[kind] || map['exercises'];
+        }
+
         function buildNavCardsHTML(stations, topic) {
             const colors = [
-                { bg:'#ecfdf5', border:'#10b981', titleColor:'#065f46', tag:'#d1fae5', tagText:'#065f46' },
-                { bg:'#fef3c7', border:'#f59e0b', titleColor:'#92400e', tag:'#fde68a', tagText:'#92400e' },
-                { bg:'#ede9fe', border:'#8b5cf6', titleColor:'#5b21b6', tag:'#ddd6fe', tagText:'#5b21b6' },
-                { bg:'#fee2e2', border:'#ef4444', titleColor:'#991b1b', tag:'#fecaca', tagText:'#991b1b' }
+                { bg:'#ecfdf5', border:'#10b981', titleColor:'#065f46', tag:'#d1fae5', tagText:'#065f46', section:'#a7f3d0' },
+                { bg:'#fef3c7', border:'#f59e0b', titleColor:'#92400e', tag:'#fde68a', tagText:'#92400e', section:'#fde68a' },
+                { bg:'#ede9fe', border:'#8b5cf6', titleColor:'#5b21b6', tag:'#ddd6fe', tagText:'#5b21b6', section:'#c4b5fd' },
+                { bg:'#fee2e2', border:'#ef4444', titleColor:'#991b1b', tag:'#fecaca', tagText:'#991b1b', section:'#fca5a5' }
             ];
             const today = new Date().toLocaleDateString('he-IL');
             let cards = '';
             stations.forEach((s, i) => {
                 const c = colors[i % 4];
+                const meta = kindMetadata(s.kind);
+                const preview = previewFromMission(s.mission);
+                const section = (icon, title, content) => `
+                    <div style="background:#fff; border-right:4px solid ${c.border}; border-radius:0 12px 12px 0; padding:12px 16px; margin-top:12px;">
+                        <div style="font-weight:900; color:${c.titleColor}; font-size:1.02rem; margin-bottom:6px;">${icon} ${title}</div>
+                        <div style="font-size:0.98rem; line-height:1.75; color:#1e293b;">${content}</div>
+                    </div>
+                `;
                 cards += `
-                    <div style="background:${c.bg}; border:3px solid ${c.border}; border-radius:18px; padding:24px 28px; margin-bottom:22px; page-break-inside:avoid;">
-                        <div style="display:flex; align-items:center; gap:14px; border-bottom:2px solid ${c.border}; padding-bottom:12px; margin-bottom:16px;">
-                            <span style="background:${c.border}; color:#fff; width:54px; height:54px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:1.8rem; font-weight:900; flex-shrink:0;">${i+1}</span>
+                    <div style="background:${c.bg}; border:3px solid ${c.border}; border-radius:18px; padding:22px 26px; margin-bottom:24px; page-break-inside:avoid; page-break-before:auto;">
+                        <div style="display:flex; align-items:center; gap:14px; border-bottom:2.5px solid ${c.border}; padding-bottom:12px; margin-bottom:14px;">
+                            <span style="background:${c.border}; color:#fff; width:60px; height:60px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:2rem; font-weight:900; flex-shrink:0;">${i+1}</span>
                             <div>
-                                <div style="font-size:1.5rem; font-weight:900; color:${c.titleColor}; line-height:1.2;">${s.title}</div>
-                                <div style="display:inline-block; background:${c.tag}; color:${c.tagText}; padding:4px 12px; border-radius:20px; font-size:0.9rem; font-weight:700; margin-top:6px;">🎯 ${s.goal} · ⏳ ${s.time}</div>
+                                <div style="font-size:0.85rem; color:${c.titleColor}; font-weight:700; opacity:0.8;">${meta.label}</div>
+                                <div style="font-size:1.55rem; font-weight:900; color:${c.titleColor}; line-height:1.15;">${s.title}</div>
+                                <div style="display:inline-block; background:${c.tag}; color:${c.tagText}; padding:4px 12px; border-radius:20px; font-size:0.88rem; font-weight:700; margin-top:6px;">🎯 ${s.goal} · ⏳ ${s.time}</div>
                             </div>
                         </div>
-                        <div style="font-size:1.05rem; line-height:1.75; color:#1e293b;">
-                            ${s.learn || ''}
-                        </div>
-                        <div style="background:#fff; border:1.5px dashed ${c.border}; border-radius:12px; padding:14px 18px; margin-top:14px;">
-                            <div style="font-weight:900; color:${c.titleColor}; font-size:1rem; margin-bottom:6px;">📝 מה לעשות הלאה?</div>
-                            <div style="font-size:0.98rem; color:#334155;">קראו את הכרטיס לעיל. אחרי שהבנתם — עברו לתחנה ${i+1} ופתרו את המשימה. בסיום, בדקו את עצמכם בדף הפתרונות.</div>
+
+                        ${section('📖', 'מה תפגוש בתחנה', meta.preview)}
+                        ${section('👀', 'הצצה למשימה', `<i style="color:#475569;">"${preview}"</i>`)}
+                        ${section('💡', 'מה תלמד מהכרטיס הזה', (s.learn || '').replace(/<h4[^>]*>.*?<\/h4>/g, ''))}
+                        ${section('🛠️', 'אסטרטגיה לתחנה', meta.strategy)}
+                        ${section('⚠️', 'טעויות להיזהר מהן', meta.mistakes)}
+                        ${section('🔍', 'בדיקה עצמית לפני שמתחילים', meta.miniCheck)}
+
+                        <div style="background:${c.border}; color:#fff; border-radius:12px; padding:14px 18px; margin-top:14px; text-align:center; font-weight:900; font-size:1.05rem;">
+                            ✅ הצלחת? עכשיו לכו לתחנה ${i+1} ופתרו את המשימה!<br>
+                            <span style="font-size:0.9rem; font-weight:600; opacity:0.92;">בסוף — בדקו את עצמכם בדף הפתרונות.</span>
                         </div>
                     </div>
                 `;
             });
             return `
                 <div style="text-align:center; border-bottom:3px solid #4f46e5; padding-bottom:14px; margin-bottom:20px;">
-                    <h2 style="font-size:1.7rem; font-weight:900; color:#312e81; margin-bottom:4px;">🧭 כרטיסי ניווט ללמידה עצמאית</h2>
+                    <h2 style="font-size:1.75rem; font-weight:900; color:#312e81; margin-bottom:4px;">🧭 כרטיסי ניווט ללמידה עצמאית</h2>
                     <div style="color:#475569; font-size:1.05rem;">נושא: <b>${topic}</b> · ${today}</div>
                 </div>
-                <div style="background:#eef2ff; border-right:5px solid #4f46e5; padding:14px 18px; border-radius:0 10px 10px 0; margin-bottom:20px; line-height:1.7;">
-                    <b style="font-size:1.05rem;">📖 שלום לתלמיד/ה!</b><br>
-                    לפנייך 4 כרטיסי ניווט. <b>קרא כל כרטיס לפני שאתה ניגש לתחנה</b>. הכרטיס מסביר לך את המושג, נותן דוגמה ומכין אותך למשימה.<br>
-                    📌 <b>עצה:</b> אל תדלגי על הכרטיס — הוא יחסוך לך זמן והרבה בלבול!
+                <div style="background:#eef2ff; border-right:5px solid #4f46e5; padding:16px 20px; border-radius:0 12px 12px 0; margin-bottom:20px; line-height:1.75; font-size:1.02rem;">
+                    <b style="font-size:1.1rem;">📖 שלום לתלמיד/ה!</b><br>
+                    לפנייך 4 כרטיסי ניווט — אחד לכל תחנה. <b>קרא כל כרטיס לפני שאתה ניגש לתחנה</b>. הכרטיס מסביר את המושג, מציג דוגמה, מזהיר מטעויות נפוצות ומכין אותך בדיוק לסוג השאלות שתפגוש.<br>
+                    📌 <b>עצה:</b> אל תדלג על הכרטיס — הוא יחסוך לך זמן ובלבול בתחנה!
                 </div>
                 ${cards}
                 <div style="text-align:center; color:#94a3b8; font-size:0.85rem; margin-top:30px; border-top:1px solid #e2e8f0; padding-top:14px;">
-                    בהצלחה! 🌟 — כרטיסי ניווט ל${topic}
+                    בהצלחה! 🌟 · כרטיסי ניווט לנושא "${topic}"
                 </div>
             `;
         }
