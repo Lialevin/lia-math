@@ -1225,6 +1225,215 @@
                       bonus: 'אם דנה רוצה להוסיף שיעור ספורט של 30 דקות — איך משנים?',
                       solutions: `<b>סה"כ זמן נדרש:</b> 60+15+45+30+60+45 = <b>255 דקות = 4 שעות ו-15 דקות</b>.<br>יש 5 שעות פנויות (8:00-13:00) = 300 דק. <b>נכנס יפה!</b><br><br><b>דוגמת לוח זמנים:</b><br>• 8:00-9:00 — מתמטיקה<br>• 9:00-9:15 — הפסקה<br>• 9:15-10:00 — עברית<br>• 10:00-10:30 — הפסקת אוכל<br>• 10:30-11:30 — אומנות<br>• 11:30-12:15 — ריקוד<br>• 12:15-13:00 — זמן חופשי (45 דק נשארות).<br>בונוס: ספורט 30 דק נכנס בקלות לזמן החופשי.` }
                 ]
+            },
+
+            /* ─────────── חיבור וחיסור בשברים עשרוניים (כיתה ד-ה) — פורמט navCard חדש ─────────── */
+            'decimals_add_sub': {
+                lessonPlan: {
+                    duration: '45 דקות', grade: 'כיתות ד׳–ה׳',
+                    goals: [
+                        'התלמיד/ה יבצעו חיבור וחיסור של שברים עשרוניים במאונך, ביישור הנקודה והשלמת אפסים',
+                        'יבצעו פריטה ונשיאה בחישובים עשרוניים, כולל פריטה מהחלק השלם',
+                        'ישלבו חיבור וחיסור בתרגיל אחד וישמרו על סדר הפעולות',
+                        'ייישמו את המיומנות בבעיות מילוליות מחיי היומיום (כסף, נפח, אורך)'
+                    ],
+                    materials: ['דפי משבצות לכתיבה במאונך', 'דף תרגול', 'מצגת הקנייה', 'דוגמאות מהסופר'],
+                    stages: [
+                        { n: 'פתיחה', t: '5 דק׳', a: 'מציגים: "רוני קנתה ספר ב-34.5 ש"ח ומחברת ב-8.75 ש"ח. כמה שילמה?"', m: 'דיון מליאה' },
+                        { n: 'הוראה ישירה', t: '12 דק׳', a: '4 שלבי הזהב: נקודה תחת נקודה, השלמת אפסים, חישוב מימין לשמאל, הורדת הנקודה. דגש על פריטה מהשלם.', m: 'הוראה + מצגת' },
+                        { n: 'תרגול מודרך', t: '10 דק׳', a: 'פתרון משותף 14.6+3.85 ו-15.2−4.85. דגש על הפריטה הכפולה: 15.2 ⟸ 15.20.', m: 'מליאה + זוגות' },
+                        { n: 'תרגול עצמאי', t: '13 דק׳', a: 'דף תרגול 1-9 + תחנות 1-2.', m: 'עבודה אישית' },
+                        { n: 'סיכום', t: '5 דק׳', a: 'יציאת דלת: "15 − 3.42 = ?" + תזכורת ל-4 השלבים.', m: 'מליאה' }
+                    ],
+                    homework: 'דף תרגול 10-12. רישום 3 חישובים מהחיים (קניות / זמן).',
+                    differentiation: '<b>מתקשים:</b> רק חיבור (תחנה 1) עם דף משבצות צבעוני וטבלת ערכי מקום. <b>מתקדמים:</b> תחנות 3 ו-4 + יצירת בעיה מקורית.',
+                    assessment: 'דף תרגול + יציאת דלת. הצלחה = 7/9 נכון. תצפית בתרגול עצמאי.'
+                },
+                practiceSheet: [
+                    { q: 'פתרו: <span class="math-ltr">14.6 + 3.85 = ?</span>', a: '<span class="math-ltr">18.45</span>' },
+                    { q: 'פתרו: <span class="math-ltr">25.4 + 7.92 = ?</span>', a: '<span class="math-ltr">33.32</span>' },
+                    { q: 'פתרו: <span class="math-ltr">15.2 − 4.85 = ?</span>', a: '<span class="math-ltr">10.35</span>' },
+                    { q: 'פתרו: <span class="math-ltr">20 − 6.34 = ?</span>', a: '<span class="math-ltr">13.66</span>' },
+                    { q: 'פתרו: <span class="math-ltr">12.7 + 5.45 = ?</span>', a: '<span class="math-ltr">18.15</span>' },
+                    { q: 'פתרו: <span class="math-ltr">23.1 − 7.65 = ?</span>', a: '<span class="math-ltr">15.45</span>' },
+                    { q: 'השלימו: <span class="math-ltr">8.4 + ? = 10</span>', a: '<span class="math-ltr">1.6</span>' },
+                    { q: 'רוני קנתה ספר ב-34.5 ש"ח ומחברת ב-8.75 ש"ח. כמה שילמה?', a: '34.5 + 8.75 = <b>43.25 ש"ח</b>' },
+                    { q: 'באגרטל היו 2.4 ליטרים. התאדו 0.85 ליטרים. כמה נשאר?', a: '2.4 − 0.85 = <b>1.55 ליטרים</b>' },
+                    { q: 'אתגר: <span class="math-ltr">7.5 + 12.85 − 3.2 = ?</span>', a: '<span class="math-ltr">17.15</span>' },
+                    { q: 'אתגר: דניאל קנה 3 ספרים ב-12.50 ש"ח כל אחד. שילם 50 ש"ח. כמה עודף קיבל?', a: '3 × 12.50 = 37.50. עודף: 50 − 37.50 = <b>12.50 ש"ח</b>' },
+                    { q: 'אתגר יצירה: חברו תרגיל חיסור עשרוני שתוצאתו בדיוק 1.05.', a: 'דוגמאות: <span class="math-ltr">2 − 0.95</span> ; <span class="math-ltr">5.25 − 4.2</span> ; <span class="math-ltr">10 − 8.95</span>' }
+                ],
+                scaffold: `<b>💡 חיבור וחיסור בשברים עשרוניים — 4 שלבי הזהב</b><br><br>
+                1. <b>נקודה תחת נקודה</b> — סדרו את התרגיל במאונך עם הנקודה ביישור.<br>
+                2. <b>השלמת אפסים</b> — אם למספר אחד יש פחות ספרות עשרוניות, הוסיפו אפסים מימין (לא משנה את הערך!).<br>
+                3. <b>חישוב מימין לשמאל</b> — חברו או חסרו כמו במספרים שלמים (עם נשיאה/פריטה).<br>
+                4. <b>הורדת הנקודה</b> — בסיום, הורידו את הנקודה ישר לתשובה.<br><br>
+                ⚠️ <b>טעות נפוצה:</b> שכחה להוסיף אפסים — מובילה לטעויות בחישוב!<br>
+                ⚠️ <b>במספר שלם (כמו 20):</b> הנקודה נמצאת אחרי הספרה האחרונה ⟸ 20.00`,
+                exitTicket: `<b>בחנו את הבנתכם:</b><br><br>
+                <b>שאלה 1:</b> פתרו במאונך: <span class="math-ltr">15 − 3.42 = ?</span> (אל תשכחו להפוך 15 ל-15.00!)<br>
+                <b>שאלה 2:</b> במכולת קנו 2.5 ק"ג עגבניות ב-6.80 ש"ח לקילו. כמה שילמו?`,
+                stations: [
+                    /* === תחנה 1: חיבור עשרוני === */
+                    {
+                        kind: 'exercises',
+                        title: 'תחנה 1: חיבור שברים עשרוניים',
+                        goal: 'שליטה בחיבור עשרוני במאונך',
+                        time: '12 דקות',
+                        navCard: {
+                            intro: 'ברוכים הבאים! כרטיס זה יעזור לכם לפתור כל תרגיל <b>חיבור</b> של מספרים עשרוניים בקלות ובלי להתבלבל. עקבו אחר ארבעת השלבים הבאים:',
+                            steps: [
+                                { num: '1️⃣', name: "שלב א': נקודה מתחת לנקודה!", body: 'רושמים את התרגיל במאונך (מספר מתחת למספר). <b>החוק החשוב ביותר:</b> הנקודה העשרונית של המספר הראשון חייבת להיות בדיוק <b>מעל</b> הנקודה העשרונית של המספר השני.' },
+                                { num: '2️⃣', name: "שלב ב': משלימים אפסים", body: 'אם לאחד המספרים יש פחות ספרות אחרי הנקודה (הוא "קצר" יותר), מוסיפים לו <b>אפסים מצד ימין</b> עד ששני המספרים יהיו באותו אורך. זכרו: הוספת אפס בקצה הימני של מספר עשרוני <b>לא משנה</b> את הערך שלו!' },
+                                { num: '3️⃣', name: "שלב ג': מחשבים כמו מספרים שלמים", body: 'מחברים את המספרים <b>מימין לשמאל</b>, בדיוק כמו שלמדנו בחיבור רגיל. אם מקבלים תוצאה דו-ספרתית בטור מסוים (10 ומעלה), רושמים את ספרת האחדות למטה ומעבירים את ספרת העשרות ("שומרים בראש") לטור הבא משמאל.' },
+                                { num: '4️⃣', name: "שלב ד': מורידים את הנקודה", body: 'בסיום החיבור, <b>מורידים את הנקודה העשרונית בקו ישר</b> (בדיוק באותו טור) אל התוצאה הסופית.' }
+                            ],
+                            workedExample: {
+                                problem: '14.6 + 3.85 = ?',
+                                solution: [
+                                    'נסדר במאונך — <b>נקודה תחת נקודה</b>.',
+                                    'נשלים אפסים: ל-14.6 יש ספרה אחת מימין לנקודה. ל-3.85 יש שתיים. נוסיף אפס ונקבל <b>14.60</b>.',
+                                    'נחשב במאונך מימין לשמאל:',
+                                    '• טור המאיות: <span class="math-ltr">0 + 5 = 5</span>',
+                                    '• טור העשיריות: <span class="math-ltr">6 + 8 = 14</span> — נכתוב <b>4</b> ונעביר <b>1</b> לטור האחדות',
+                                    '• טור האחדות: <span class="math-ltr">1 + 4 + 3 = 8</span>',
+                                    '• טור העשרות: <span class="math-ltr">1 + 0 = 1</span>',
+                                    'נוריד את הנקודה בקו ישר.'
+                                ],
+                                answer: '18.45'
+                            },
+                            practiceChallenge: {
+                                problem: '25.4 + 7.92 = ?',
+                                hint: 'אל תשכחו להפוך את 25.4 ל-<b>25.40</b> כדי להשוות את מספר הספרות אחרי הנקודה!',
+                                answer: '33.32'
+                            }
+                        },
+                        instructions: 'פתרו 5 תרגילי חיבור לפי 4 השלבים. הראו את הדרך במאונך.',
+                        mission: `<b>פתרו את 5 תרגילי החיבור:</b><br><br>1) <span class="math-ltr">12.4 + 5.7 = ?</span><br>2) <span class="math-ltr">8.35 + 4.2 = ?</span><br>3) <span class="math-ltr">15.8 + 6.45 = ?</span><br>4) <span class="math-ltr">23.06 + 8.9 = ?</span><br>5) <span class="math-ltr">47.5 + 12.78 = ?</span>`,
+                        hint: 'תרגיל 2: 8.35 + 4.20 (השלימו אפס). תרגיל 4: 23.06 + 8.90.',
+                        bonus: '<span class="math-ltr">99.99 + 0.01 = ?</span>',
+                        solutions: `1) <span class="math-ltr">18.1</span><br>2) <span class="math-ltr">12.55</span><br>3) <span class="math-ltr">22.25</span><br>4) <span class="math-ltr">31.96</span><br>5) <span class="math-ltr">60.28</span><br>בונוס: <span class="math-ltr">100</span> (99.99+0.01 = 100.00 = 100)`
+                    },
+
+                    /* === תחנה 2: חיסור עשרוני === */
+                    {
+                        kind: 'exercises',
+                        title: 'תחנה 2: חיסור שברים עשרוניים',
+                        goal: 'שליטה בחיסור עשרוני עם פריטה',
+                        time: '15 דקות',
+                        navCard: {
+                            intro: 'ברוכים הבאים! כרטיס זה יעזור לכם לפתור כל תרגיל <b>חיסור</b> של מספרים עשרוניים בקלות, שלב אחר שלב. בדומה לחיבור, הסוד הוא לשמור על סדר. עקבו אחר ארבעת השלבים:',
+                            steps: [
+                                { num: '1️⃣', name: "שלב א': נקודה מתחת לנקודה!", body: 'רושמים את התרגיל במאונך. <b>המספר שממנו מחסרים</b> (הראשון) למעלה, <b>המספר שמחסרים</b> (השני) למטה. הנקודה העשרונית של המספר העליון חייבת להיות בדיוק מעל זו של המספר התחתון.' },
+                                { num: '2️⃣', name: "שלב ב': משלימים אפסים", body: 'אם לאחד המספרים יש פחות ספרות אחרי הנקודה, מוסיפים אפסים מצד ימין עד ששני המספרים יהיו באותו אורך. זהו שלב <b>קריטי בחיסור!</b> חובה להשלים אפסים כדי שנוכל לחסר מכל ספרה.' },
+                                { num: '3️⃣', name: "שלב ג': מחשבים מימין לשמאל (עם פריטה)", body: 'מחסרים את המספרים מימין לשמאל, טור אחר טור. אם הספרה למעלה <b>קטנה</b> מהספרה למטה — <b>פורטים (לווים)</b> מהטור שמשמאל. התעלמו מהנקודה בשלב החישוב.' },
+                                { num: '4️⃣', name: "שלב ד': מורידים את הנקודה", body: 'בסיום החיסור, "מורידים" את הנקודה העשרונית <b>בקו ישר</b> אל התוצאה הסופית, באותו הטור של הנקודות שמעליה.' }
+                            ],
+                            workedExample: {
+                                problem: '15.2 − 4.85 = ?',
+                                solution: [
+                                    'נסדר במאונך — נקודה תחת נקודה.',
+                                    'נשלים אפס ל-15.2 כדי לקבל <b>15.20</b>.',
+                                    'נחשב במאונך מימין לשמאל עם פריטה:',
+                                    '• טור המאיות: אי אפשר לחסר 5 מ-0. <b>נפרוט מהעשיריות</b>: ה-2 הופך ל-1, וה-0 הופך ל-10. עכשיו <span class="math-ltr">10 − 5 = 5</span>.',
+                                    '• טור העשיריות: נשאר 1. אי אפשר לחסר 8 מ-1. <b>נפרוט מטור האחדות</b>: ה-5 הופך ל-4, וה-1 הופך ל-11. עכשיו <span class="math-ltr">11 − 8 = 3</span>.',
+                                    '• טור האחדות: נשארנו עם 4. <span class="math-ltr">4 − 4 = 0</span>.',
+                                    '• טור העשרות: <span class="math-ltr">1 − 0 = 1</span>.',
+                                    'נוריד את הנקודה בקו ישר.'
+                                ],
+                                answer: '10.35'
+                            },
+                            practiceChallenge: {
+                                problem: '20 − 6.34 = ?',
+                                hint: 'המספר 20 הוא <b>מספר שלם</b>. הנקודה העשרונית שלו בסוף! כדי להשוות ספרות, הפכו אותו ל-<b>20.00</b>.',
+                                answer: '13.66'
+                            }
+                        },
+                        instructions: 'פתרו 5 תרגילי חיסור לפי 4 השלבים. רשמו את הפריטות מעל הספרות.',
+                        mission: `<b>פתרו את 5 תרגילי החיסור:</b><br><br>1) <span class="math-ltr">8.5 − 3.2 = ?</span><br>2) <span class="math-ltr">15.6 − 4.85 = ?</span><br>3) <span class="math-ltr">10 − 2.75 = ?</span><br>4) <span class="math-ltr">7.04 − 3.5 = ?</span><br>5) <span class="math-ltr">25.3 − 8.96 = ?</span>`,
+                        hint: 'תרגיל 3: 10.00 − 2.75 (פריטה כפולה). תרגיל 4: 7.04 − 3.50.',
+                        bonus: '<span class="math-ltr">100 − 47.83 = ?</span>',
+                        solutions: `1) <span class="math-ltr">5.3</span><br>2) <span class="math-ltr">10.75</span><br>3) <span class="math-ltr">7.25</span><br>4) <span class="math-ltr">3.54</span><br>5) <span class="math-ltr">16.34</span><br>בונוס: <span class="math-ltr">52.17</span>`
+                    },
+
+                    /* === תחנה 3: מעורבים === */
+                    {
+                        kind: 'exercises',
+                        title: 'תחנה 3: חיבור וחיסור מעורבים',
+                        goal: 'שילוב פעולות עם פריטה מהחלק השלם',
+                        time: '12 דקות',
+                        navCard: {
+                            intro: 'כרטיס זה מיועד לפתרון תרגילים בהם המספרים כוללים <b>גם חלק שלם וגם חלק עשרוני</b> (כמו 12.5 או 3.75), או שיש <b>גם חיבור וגם חיסור</b> בתרגיל אחד. החוקיות זהה — אבל דורש תשומת לב מיוחדת!',
+                            steps: [
+                                { num: '1️⃣', name: "שלב א': יישור הנקודה במאונך", body: 'כותבים את התרגיל במאונך עם הנקודה העשרונית של המספר העליון <b>בדיוק מעל</b> זו של התחתון. כך השלמים מעל השלמים, והעשרוניים מעל העשרוניים.' },
+                                { num: '2️⃣', name: "שלב ב': השלמת אפסים", body: 'בודקים כמה ספרות יש מימין לנקודה בכל מספר. אם לאחד יש פחות — מוסיפים אפסים מצד ימין עד שיהיו באותו אורך.' },
+                                { num: '3️⃣', name: "שלב ג': חישוב מימין לשמאל (כולל פריטה מהשלם)", body: 'מבצעים את הפעולה טור אחר טור, מימין לשמאל. בחיסור: אם הספרה העליונה קטנה — פורטים מהטור השמאלי, גם אם זה אומר <b>לפרוט מהחלק השלם אל החלק העשרוני</b>.' },
+                                { num: '4️⃣', name: "שלב ד': הורדת הנקודה", body: 'מורידים את הנקודה העשרונית בקו ישר אל התוצאה, באותו טור של הנקודות במספרים שחישבנו.' }
+                            ],
+                            workedExample: {
+                                problem: '23.1 − 7.65 = ?',
+                                solution: [
+                                    'נסדר במאונך — נקודה תחת נקודה.',
+                                    'נשלים אפס ל-23.1 כדי לקבל <b>23.10</b>.',
+                                    'נחשב במאונך עם פריטה:',
+                                    '• טור המאיות: אי אפשר לחסר 5 מ-0. <b>נלווה מהעשיריות</b>: 1 ⟸ 0, 0 ⟸ 10. עכשיו <span class="math-ltr">10 − 5 = 5</span>.',
+                                    '• טור העשיריות: נשאר 0. אי אפשר לחסר 6. <b>נפרוט מטור האחדות (השלם!):</b> 3 ⟸ 2, 0 ⟸ 10. עכשיו <span class="math-ltr">10 − 6 = 4</span>.',
+                                    '• טור האחדות: נשאר 2. <span class="math-ltr">2 − 7</span> — אי אפשר! <b>נפרוט מטור העשרות:</b> 2 ⟸ 1, 2 ⟸ 12. עכשיו <span class="math-ltr">12 − 7 = 5</span>.',
+                                    '• טור העשרות: נשאר 1. <span class="math-ltr">1 − 0 = 1</span>.',
+                                    'נוריד את הנקודה.'
+                                ],
+                                answer: '15.45'
+                            },
+                            practiceChallenge: {
+                                problem: '7.5 + 12.85 − 3.2 = ?',
+                                hint: 'פתרו <b>משמאל לימין</b>: קודם 7.5 + 12.85, ואז התוצאה פחות 3.2. השלימו אפסים!',
+                                answer: '17.15'
+                            }
+                        },
+                        instructions: 'פתרו 5 תרגילים מעורבים. שימו לב לסדר הפעולות!',
+                        mission: `<b>פתרו את 5 התרגילים המעורבים:</b><br><br>1) <span class="math-ltr">12.7 + 5.45 = ?</span><br>2) <span class="math-ltr">23.1 − 7.65 = ?</span><br>3) <span class="math-ltr">4.5 + 8.75 − 2.3 = ?</span><br>4) <span class="math-ltr">15 − 4.5 − 2.85 = ?</span><br>5) <span class="math-ltr">6.8 + 12.05 − 9.4 = ?</span>`,
+                        hint: 'תרגילים 3-5: פתרו משמאל לימין, צעד אחר צעד.',
+                        bonus: '<span class="math-ltr">50.5 − 12.75 + 8.4 − 2.05 = ?</span>',
+                        solutions: `1) <span class="math-ltr">18.15</span><br>2) <span class="math-ltr">15.45</span><br>3) <span class="math-ltr">10.95</span> (4.5+8.75=13.25 ; 13.25−2.3=10.95)<br>4) <span class="math-ltr">7.65</span> (15−4.5=10.5 ; 10.5−2.85=7.65)<br>5) <span class="math-ltr">9.45</span><br>בונוס: <span class="math-ltr">44.1</span>`
+                    },
+
+                    /* === תחנה 4: שאלות מילוליות === */
+                    {
+                        kind: 'word_problems',
+                        title: 'תחנה 4: שאלות מילוליות בחיים',
+                        goal: 'יישום חיבור וחיסור עשרוני בבעיות מהחיים',
+                        time: '15 דקות',
+                        navCard: {
+                            intro: 'כרטיס זה מיועד לפתרון <b>שאלות מילוליות</b> הכוללות חיבור וחיסור של מספרים עשרוניים. עבודה מסודרת לפי השלבים תסייע בהבנת השאלה ובהגעה לפתרון הנכון.',
+                            steps: [
+                                { num: '1️⃣', name: "שלב א': קריאה פעילה וזיהוי הנתונים", body: 'קראו את השאלה <b>פעם אחת מהתחלה ועד הסוף</b> כדי להבין את ההקשר. בקריאה השנייה, סמנו או העתיקו הצידה את הנתונים המספריים ואת מה שהם מייצגים.' },
+                                { num: '2️⃣', name: "שלב ב': זיהוי מילות המפתח וקביעת הפעולה", body: 'חפשו בשאלה מילים שמכוונות אתכם לפעולה: <br>• <b>חיבור:</b> "בסך הכל", "ביחד", "סכום", "הוסיפו", "קנו גם וגם".<br>• <b>חיסור:</b> "הפרש", "כמה נשאר", "יותר מ-", "פחות מ-", "עודף".<br>נסחו את התרגיל בשורה אופקית <b>לפני</b> שאתם מחשבים.' },
+                                { num: '3️⃣', name: "שלב ג': חישוב במאונך", body: 'פתרו את התרגיל לפי 4 כללי החישוב העשרוני: יישור הנקודה ⟸ השלמת אפסים ⟸ חישוב מימין לשמאל (עם פריטה/נשיאה) ⟸ הורדת הנקודה.' },
+                                { num: '4️⃣', name: "שלב ד': כתיבת תשובה מילולית מלאה", body: 'בסיום החישוב, חזרו לשאלת המשימה וכתבו <b>תשובה מילולית מלאה</b> עם היחידות המתאימות (שקלים, מטרים, ליטרים, ק"ג).' }
+                            ],
+                            workedExample: {
+                                problem: 'רוני קנתה ספר ב-34.5 ש"ח ומחברת ב-8.75 ש"ח. כמה שילמה רוני בסך הכל?',
+                                solution: [
+                                    '<b>נתונים:</b> מחיר ספר = 34.5 ש"ח ; מחיר מחברת = 8.75 ש"ח.',
+                                    '<b>מילות מפתח:</b> "בסך הכל" ⟸ פעולת <b>חיבור</b>. התרגיל: <span class="math-ltr">34.5 + 8.75 = ?</span>',
+                                    '<b>חישוב:</b> נשלים אפס ⟸ 34.50 + 8.75. נחשב במאונך מימין לשמאל.',
+                                    '<b>תשובה מילולית:</b> רוני שילמה בסך הכל 43.25 ש"ח.'
+                                ],
+                                answer: 'רוני שילמה 43.25 ש"ח'
+                            },
+                            practiceChallenge: {
+                                problem: 'באגרטל היו 2.4 ליטרים של מים. לאחר מספר ימים התאדו 0.85 ליטרים. כמה ליטרים נותרו באגרטל?',
+                                hint: 'מילת מפתח: "נותרו" ⟸ חיסור. תרגיל: <span class="math-ltr">2.4 − 0.85</span>. הפכו 2.4 ל-2.40 ופרטו!',
+                                answer: 'באגרטל נותרו 1.55 ליטרים'
+                            }
+                        },
+                        instructions: 'קראו, סמנו נתונים, כתבו תרגיל, חשבו, ענו במשפט מלא.',
+                        mission: `<b>בעיה 1:</b> דניאל קנה כדורגל ב-45.9 ש"ח וכדורסל ב-32.5 ש"ח. כמה שילם בסך הכל?<br><br><b>בעיה 2:</b> במכל היו 8.4 ליטרים של מיץ. במסיבה שתו 5.65 ליטרים. כמה נשאר במכל?<br><br><b>בעיה 3 (רב-שלבית):</b> אמא קנתה 2.5 ק"ג עגבניות ב-6.80 ש"ח לקילו. היא שילמה ב-50 ש"ח. כמה עודף קיבלה?`,
+                        hint: 'בעיה 1: "בסך הכל" = חיבור. בעיה 2: "נשאר" = חיסור. בעיה 3: קודם 2.5 × 6.80, ואז 50 פחות התוצאה.',
+                        bonus: 'בבעיה 3, אם אמא קנתה גם 1.5 ק"ג מלפפונים ב-4.50 ש"ח לקילו — כמה עודף קיבלה?',
+                        solutions: `<b>בעיה 1:</b> 45.9 + 32.5 = 78.4. <b>דניאל שילם 78.4 ש"ח</b>.<br><b>בעיה 2:</b> 8.4 − 5.65 = 8.40 − 5.65 = 2.75. <b>נשארו 2.75 ליטרים</b>.<br><b>בעיה 3:</b> מחיר עגבניות: 2.5 × 6.80 = 17 ש"ח. עודף: 50 − 17 = <b>33 ש"ח</b>.<br><b>בונוס:</b> מלפפונים: 1.5 × 4.50 = 6.75 ש"ח. סה"כ הוצאה: 17 + 6.75 = 23.75. עודף: 50 − 23.75 = <b>26.25 ש"ח</b>.`
+                    }
+                ]
             }
         };
 
@@ -1343,6 +1552,7 @@
                 else if(topic.includes('זווית')) dbData = PEDAGOGICAL_DB['angles'];
                 else if(topic.includes('שעון') || topic.includes('זמן') || topic.includes('דקות') || topic.includes('שעות')) dbData = PEDAGOGICAL_DB['clock_time'];
                 else if(topic.includes('בעיות מילוליות') || topic.includes('רב-שלבי')) dbData = PEDAGOGICAL_DB['word_problems'];
+                else if((topic.includes('חיבור') || topic.includes('חיסור')) && topic.includes('עשרונ')) dbData = PEDAGOGICAL_DB['decimals_add_sub'];
                 else if(topic.includes('עשרונ')) dbData = PEDAGOGICAL_DB['decimals'];
                 else if(topic.includes('שבר')) dbData = PEDAGOGICAL_DB['fractions'];
                 else if(topic.includes('כפל') || topic.includes('חילוק') || topic.includes('לוח הכפל')) dbData = PEDAGOGICAL_DB['mult_div_basic'];
@@ -1496,49 +1706,109 @@
             return map[kind] || map['exercises'];
         }
 
+        // רינדור כרטיס בפורמט החדש העשיר (navCard object)
+        function renderRichNavCard(s, i, c) {
+            const nc = s.navCard;
+            const stepsHtml = nc.steps.map(st => `
+                <div style="background:#fff; border:2px solid ${c.border}; border-radius:14px; padding:14px 18px; margin-bottom:10px;">
+                    <div style="font-weight:900; color:${c.titleColor}; font-size:1.08rem; margin-bottom:4px;">${st.num} ${st.name}</div>
+                    <div style="font-size:0.99rem; line-height:1.75; color:#1e293b;">${st.body}</div>
+                </div>
+            `).join('');
+            const exampleSolutionHtml = nc.workedExample.solution.map(line => `<div style="padding:3px 0; line-height:1.75;">${line}</div>`).join('');
+            return `
+                <div style="background:${c.bg}; border:3px solid ${c.border}; border-radius:18px; padding:22px 26px; margin-bottom:24px; page-break-inside:avoid;">
+                    <div style="display:flex; align-items:center; gap:14px; border-bottom:2.5px solid ${c.border}; padding-bottom:12px; margin-bottom:14px;">
+                        <span style="background:${c.border}; color:#fff; width:64px; height:64px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:2.1rem; font-weight:900; flex-shrink:0;">${i+1}</span>
+                        <div>
+                            <div style="font-size:0.88rem; color:${c.titleColor}; font-weight:700; opacity:0.8;">🧭 כרטיס ניווט · תחנה ${i+1}</div>
+                            <div style="font-size:1.55rem; font-weight:900; color:${c.titleColor}; line-height:1.2;">${s.title}</div>
+                            <div style="display:inline-block; background:${c.tag}; color:${c.tagText}; padding:4px 12px; border-radius:20px; font-size:0.88rem; font-weight:700; margin-top:6px;">🎯 ${s.goal} · ⏳ ${s.time}</div>
+                        </div>
+                    </div>
+
+                    <div style="background:#fff; border-right:5px solid ${c.border}; padding:14px 18px; border-radius:0 12px 12px 0; margin-bottom:16px; line-height:1.7; font-size:1.02rem;">
+                        ${nc.intro}
+                    </div>
+
+                    <div style="margin-bottom:16px;">
+                        <div style="font-size:1.2rem; font-weight:900; color:${c.titleColor}; margin-bottom:10px;">🗺️ ${nc.stepsTitle || '4 שלבי הדרך לפתרון'}</div>
+                        ${stepsHtml}
+                    </div>
+
+                    <div style="background:#fff; border:2px solid ${c.border}; border-radius:14px; padding:16px 20px; margin-bottom:16px;">
+                        <div style="font-size:1.15rem; font-weight:900; color:${c.titleColor}; margin-bottom:10px;">📝 דוגמה פתורה ומודגמת</div>
+                        <div style="background:${c.bg}; padding:10px 14px; border-radius:8px; font-size:1.1rem; font-weight:900; text-align:center; margin-bottom:10px;">${nc.workedExample.problem}</div>
+                        <div style="font-size:1rem; line-height:1.8; color:#1e293b;">${exampleSolutionHtml}</div>
+                        <div style="margin-top:12px; background:${c.border}; color:#fff; padding:10px 14px; border-radius:8px; text-align:center; font-weight:900; font-size:1.1rem;">✅ התשובה הסופית: ${nc.workedExample.answer}</div>
+                    </div>
+
+                    <div style="background:#fff; border:2.5px dashed ${c.border}; border-radius:14px; padding:16px 20px;">
+                        <div style="font-size:1.15rem; font-weight:900; color:${c.titleColor}; margin-bottom:10px;">🚀 תרגיל אתגר לתרגול עצמי</div>
+                        <div style="background:${c.bg}; padding:10px 14px; border-radius:8px; font-size:1.15rem; font-weight:900; text-align:center; margin-bottom:10px;">${nc.practiceChallenge.problem}</div>
+                        <div style="background:#fef3c7; border-right:4px solid #f59e0b; padding:10px 14px; border-radius:0 8px 8px 0; margin-bottom:10px; font-size:0.98rem;">
+                            <b>💡 רמז:</b> ${nc.practiceChallenge.hint}
+                        </div>
+                        <details style="margin-top:8px;">
+                            <summary style="cursor:pointer; font-weight:700; color:${c.titleColor}; font-size:0.98rem;">🔓 לחצו לחשיפת התשובה</summary>
+                            <div style="background:${c.border}; color:#fff; padding:10px 14px; border-radius:8px; text-align:center; font-weight:900; margin-top:8px; font-size:1.1rem;">התשובה הסופית: ${nc.practiceChallenge.answer}</div>
+                        </details>
+                    </div>
+
+                    <div style="background:${c.border}; color:#fff; border-radius:12px; padding:14px 18px; margin-top:16px; text-align:center; font-weight:900; font-size:1.05rem;">
+                        ✅ הבנתם? עכשיו לתחנה ${i+1} — פתרו את 5 התרגילים!<br>
+                        <span style="font-size:0.9rem; font-weight:600; opacity:0.92;">בסיום — בדקו את עצמכם בדף הפתרונות.</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // רינדור כרטיס בפורמט הישן (learn HTML) — fallback לתאימות לאחור
+        function renderLegacyNavCard(s, i, c) {
+            const meta = kindMetadata(s.kind);
+            const preview = previewFromMission(s.mission);
+            const section = (icon, title, content) => `
+                <div style="background:#fff; border-right:4px solid ${c.border}; border-radius:0 12px 12px 0; padding:12px 16px; margin-top:12px;">
+                    <div style="font-weight:900; color:${c.titleColor}; font-size:1.02rem; margin-bottom:6px;">${icon} ${title}</div>
+                    <div style="font-size:0.98rem; line-height:1.75; color:#1e293b;">${content}</div>
+                </div>
+            `;
+            return `
+                <div style="background:${c.bg}; border:3px solid ${c.border}; border-radius:18px; padding:22px 26px; margin-bottom:24px; page-break-inside:avoid;">
+                    <div style="display:flex; align-items:center; gap:14px; border-bottom:2.5px solid ${c.border}; padding-bottom:12px; margin-bottom:14px;">
+                        <span style="background:${c.border}; color:#fff; width:60px; height:60px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:2rem; font-weight:900; flex-shrink:0;">${i+1}</span>
+                        <div>
+                            <div style="font-size:0.85rem; color:${c.titleColor}; font-weight:700; opacity:0.8;">${meta.label}</div>
+                            <div style="font-size:1.55rem; font-weight:900; color:${c.titleColor}; line-height:1.15;">${s.title}</div>
+                            <div style="display:inline-block; background:${c.tag}; color:${c.tagText}; padding:4px 12px; border-radius:20px; font-size:0.88rem; font-weight:700; margin-top:6px;">🎯 ${s.goal} · ⏳ ${s.time}</div>
+                        </div>
+                    </div>
+                    ${section('📖', 'מה תפגוש בתחנה', meta.preview)}
+                    ${section('👀', 'הצצה למשימה', `<i style="color:#475569;">"${preview}"</i>`)}
+                    ${section('💡', 'מה תלמד מהכרטיס הזה', (s.learn || '').replace(/<h4[^>]*>.*?<\/h4>/g, ''))}
+                    ${section('🛠️', 'אסטרטגיה לתחנה', meta.strategy)}
+                    ${section('⚠️', 'טעויות להיזהר מהן', meta.mistakes)}
+                    ${section('🔍', 'בדיקה עצמית לפני שמתחילים', meta.miniCheck)}
+                    <div style="background:${c.border}; color:#fff; border-radius:12px; padding:14px 18px; margin-top:14px; text-align:center; font-weight:900; font-size:1.05rem;">
+                        ✅ הצלחת? עכשיו לכו לתחנה ${i+1} ופתרו את המשימה!<br>
+                        <span style="font-size:0.9rem; font-weight:600; opacity:0.92;">בסוף — בדקו את עצמכם בדף הפתרונות.</span>
+                    </div>
+                </div>
+            `;
+        }
+
         function buildNavCardsHTML(stations, topic) {
             const colors = [
-                { bg:'#ecfdf5', border:'#10b981', titleColor:'#065f46', tag:'#d1fae5', tagText:'#065f46', section:'#a7f3d0' },
-                { bg:'#fef3c7', border:'#f59e0b', titleColor:'#92400e', tag:'#fde68a', tagText:'#92400e', section:'#fde68a' },
-                { bg:'#ede9fe', border:'#8b5cf6', titleColor:'#5b21b6', tag:'#ddd6fe', tagText:'#5b21b6', section:'#c4b5fd' },
-                { bg:'#fee2e2', border:'#ef4444', titleColor:'#991b1b', tag:'#fecaca', tagText:'#991b1b', section:'#fca5a5' }
+                { bg:'#ecfdf5', border:'#10b981', titleColor:'#065f46', tag:'#d1fae5', tagText:'#065f46' },
+                { bg:'#fef3c7', border:'#f59e0b', titleColor:'#92400e', tag:'#fde68a', tagText:'#92400e' },
+                { bg:'#ede9fe', border:'#8b5cf6', titleColor:'#5b21b6', tag:'#ddd6fe', tagText:'#5b21b6' },
+                { bg:'#fee2e2', border:'#ef4444', titleColor:'#991b1b', tag:'#fecaca', tagText:'#991b1b' }
             ];
             const today = new Date().toLocaleDateString('he-IL');
             let cards = '';
             stations.forEach((s, i) => {
                 const c = colors[i % 4];
-                const meta = kindMetadata(s.kind);
-                const preview = previewFromMission(s.mission);
-                const section = (icon, title, content) => `
-                    <div style="background:#fff; border-right:4px solid ${c.border}; border-radius:0 12px 12px 0; padding:12px 16px; margin-top:12px;">
-                        <div style="font-weight:900; color:${c.titleColor}; font-size:1.02rem; margin-bottom:6px;">${icon} ${title}</div>
-                        <div style="font-size:0.98rem; line-height:1.75; color:#1e293b;">${content}</div>
-                    </div>
-                `;
-                cards += `
-                    <div style="background:${c.bg}; border:3px solid ${c.border}; border-radius:18px; padding:22px 26px; margin-bottom:24px; page-break-inside:avoid; page-break-before:auto;">
-                        <div style="display:flex; align-items:center; gap:14px; border-bottom:2.5px solid ${c.border}; padding-bottom:12px; margin-bottom:14px;">
-                            <span style="background:${c.border}; color:#fff; width:60px; height:60px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:2rem; font-weight:900; flex-shrink:0;">${i+1}</span>
-                            <div>
-                                <div style="font-size:0.85rem; color:${c.titleColor}; font-weight:700; opacity:0.8;">${meta.label}</div>
-                                <div style="font-size:1.55rem; font-weight:900; color:${c.titleColor}; line-height:1.15;">${s.title}</div>
-                                <div style="display:inline-block; background:${c.tag}; color:${c.tagText}; padding:4px 12px; border-radius:20px; font-size:0.88rem; font-weight:700; margin-top:6px;">🎯 ${s.goal} · ⏳ ${s.time}</div>
-                            </div>
-                        </div>
-
-                        ${section('📖', 'מה תפגוש בתחנה', meta.preview)}
-                        ${section('👀', 'הצצה למשימה', `<i style="color:#475569;">"${preview}"</i>`)}
-                        ${section('💡', 'מה תלמד מהכרטיס הזה', (s.learn || '').replace(/<h4[^>]*>.*?<\/h4>/g, ''))}
-                        ${section('🛠️', 'אסטרטגיה לתחנה', meta.strategy)}
-                        ${section('⚠️', 'טעויות להיזהר מהן', meta.mistakes)}
-                        ${section('🔍', 'בדיקה עצמית לפני שמתחילים', meta.miniCheck)}
-
-                        <div style="background:${c.border}; color:#fff; border-radius:12px; padding:14px 18px; margin-top:14px; text-align:center; font-weight:900; font-size:1.05rem;">
-                            ✅ הצלחת? עכשיו לכו לתחנה ${i+1} ופתרו את המשימה!<br>
-                            <span style="font-size:0.9rem; font-weight:600; opacity:0.92;">בסוף — בדקו את עצמכם בדף הפתרונות.</span>
-                        </div>
-                    </div>
-                `;
+                cards += s.navCard ? renderRichNavCard(s, i, c) : renderLegacyNavCard(s, i, c);
             });
             return `
                 <div style="text-align:center; border-bottom:3px solid #4f46e5; padding-bottom:14px; margin-bottom:20px;">
@@ -1547,8 +1817,8 @@
                 </div>
                 <div style="background:#eef2ff; border-right:5px solid #4f46e5; padding:16px 20px; border-radius:0 12px 12px 0; margin-bottom:20px; line-height:1.75; font-size:1.02rem;">
                     <b style="font-size:1.1rem;">📖 שלום לתלמיד/ה!</b><br>
-                    לפנייך 4 כרטיסי ניווט — אחד לכל תחנה. <b>קרא כל כרטיס לפני שאתה ניגש לתחנה</b>. הכרטיס מסביר את המושג, מציג דוגמה, מזהיר מטעויות נפוצות ומכין אותך בדיוק לסוג השאלות שתפגוש.<br>
-                    📌 <b>עצה:</b> אל תדלג על הכרטיס — הוא יחסוך לך זמן ובלבול בתחנה!
+                    לפנייך 4 כרטיסי ניווט — אחד לכל תחנה. <b>קרא כל כרטיס לפני שאתה ניגש לתחנה</b>. בכל כרטיס: 4 שלבי הדרך לפתרון, דוגמה פתורה ותרגיל אתגר עם רמז ותשובה.<br>
+                    📌 <b>עצה:</b> פתור קודם את תרגיל האתגר בכרטיס — אם הצלחת, אתה מוכן!
                 </div>
                 ${cards}
                 <div style="text-align:center; color:#94a3b8; font-size:0.85rem; margin-top:30px; border-top:1px solid #e2e8f0; padding-top:14px;">
