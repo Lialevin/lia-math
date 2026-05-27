@@ -1960,7 +1960,7 @@
             const keyBlock = showAnswers ? `
                 <div style="background:#f0fdf4; border:2px dashed #10b981; border-radius:14px; padding:18px; margin-top:24px;">
                     <h3 style="color:#0f766e; font-size:1.2rem; font-weight:900; margin-bottom:10px;">🔑 דף תשובות למורה (מחוון)</h3>
-                    <ol style="margin-right:24px;">${items.map(it=>`<li style="margin-bottom:8px; line-height:1.6;">${it.a}</li>`).join('')}</ol>
+                    <ol style="margin-right:24px;">${items.map(it=>`<li dir="${dirForText(it.a)}" style="margin-bottom:8px; line-height:1.6;">${it.a}</li>`).join('')}</ol>
                 </div>` : '';
             return `
                 <div style="text-align:center; border-bottom:2px dashed #cbd5e1; padding-bottom:14px; margin-bottom:18px;">
@@ -1979,13 +1979,37 @@
                     <div class="ws-q-row">
                         <div class="ws-q-num">${i+1}</div>
                         <div>
-                            <div style="font-weight:700; line-height:1.65;">${it.q}</div>
+                            <div dir="${dirForText(it.q)}" style="font-weight:700; line-height:1.65;">${it.q}</div>
                             <div class="ws-ans-line"></div>
                         </div>
                     </div>
                 `).join('')}
                 ${keyBlock}
             `;
+        }
+
+        /* ──────── עוזרי כיוון: מזהה אוטומטית מתמטיקה (LTR) מול עברית (RTL) ──────── */
+        function dirForText(text) {
+            // מסיר HTML, רואה את הקובע הראשון
+            const stripped = (text || '').replace(/<[^>]+>/g, '').trim();
+            // אם מתחיל בספרה/סוגריים/סימן מתמטי → LTR
+            if (/^[\d\(\[\-+−]/.test(stripped)) return 'ltr';
+            // אם מתחיל ב-"מספר)" כמו "1)" — נחשב מתמטי
+            if (/^\d+[\.\)]/.test(stripped)) return 'ltr';
+            return 'rtl';
+        }
+
+        function wrapLinesByDirection(html) {
+            // מפצל לפי <br> ועוטף כל שורה ב-div עם כיוון מתאים
+            if (!html) return '';
+            const parts = html.split(/<br\s*\/?>(?:\s*<br\s*\/?>)*/i);
+            return parts.map(part => {
+                const trimmed = part.trim();
+                if (!trimmed) return '';
+                const d = dirForText(trimmed);
+                const align = d === 'ltr' ? 'right' : 'right';  // תמיד יישור ימני בעמוד עברי
+                return `<div dir="${d}" style="text-align:${align}; margin:3px 0;">${trimmed}</div>`;
+            }).join('');
         }
 
         /* ──────── כרטיסי ניווט ללמידה עצמאית — מבוסס תוכן ──────── */
@@ -2034,10 +2058,15 @@
             const stepsHtml = nc.steps.map(st => `
                 <div style="background:#fff; border:2px solid ${c.border}; border-radius:14px; padding:14px 18px; margin-bottom:10px;">
                     <div style="font-weight:900; color:${c.titleColor}; font-size:1.08rem; margin-bottom:4px;">${st.num} ${st.name}</div>
-                    <div style="font-size:0.99rem; line-height:1.75; color:#1e293b;">${st.body}</div>
+                    <div style="font-size:0.99rem; line-height:1.75; color:#1e293b;" dir="${dirForText(st.body)}">${st.body}</div>
                 </div>
             `).join('');
-            const exampleSolutionHtml = nc.workedExample.solution.map(line => `<div style="padding:3px 0; line-height:1.75;">${line}</div>`).join('');
+            // כל שלב פתרון מקבל כיוון לפי תוכנו
+            const exampleSolutionHtml = nc.workedExample.solution.map(line => `<div dir="${dirForText(line)}" style="padding:3px 0; line-height:1.75;">${line}</div>`).join('');
+            const problemDir = dirForText(nc.workedExample.problem);
+            const challengeDir = dirForText(nc.practiceChallenge.problem);
+            const wAnswerDir = dirForText(nc.workedExample.answer);
+            const pAnswerDir = dirForText(nc.practiceChallenge.answer);
             return `
                 <div style="background:${c.bg}; border:3px solid ${c.border}; border-radius:18px; padding:22px 26px; margin-bottom:24px; page-break-inside:avoid;">
                     <div style="display:flex; align-items:center; gap:14px; border-bottom:2.5px solid ${c.border}; padding-bottom:12px; margin-bottom:14px;">
@@ -2060,20 +2089,20 @@
 
                     <div style="background:#fff; border:2px solid ${c.border}; border-radius:14px; padding:16px 20px; margin-bottom:16px;">
                         <div style="font-size:1.15rem; font-weight:900; color:${c.titleColor}; margin-bottom:10px;">📝 דוגמה פתורה ומודגמת</div>
-                        <div style="background:${c.bg}; padding:10px 14px; border-radius:8px; font-size:1.1rem; font-weight:900; text-align:center; margin-bottom:10px;">${nc.workedExample.problem}</div>
+                        <div dir="${problemDir}" style="background:${c.bg}; padding:10px 14px; border-radius:8px; font-size:1.1rem; font-weight:900; text-align:center; margin-bottom:10px; font-family: ${problemDir==='ltr'?'monospace':'inherit'};">${nc.workedExample.problem}</div>
                         <div style="font-size:1rem; line-height:1.8; color:#1e293b;">${exampleSolutionHtml}</div>
-                        <div style="margin-top:12px; background:${c.border}; color:#fff; padding:10px 14px; border-radius:8px; text-align:center; font-weight:900; font-size:1.1rem;">✅ התשובה הסופית: ${nc.workedExample.answer}</div>
+                        <div dir="${wAnswerDir}" style="margin-top:12px; background:${c.border}; color:#fff; padding:10px 14px; border-radius:8px; text-align:center; font-weight:900; font-size:1.1rem;">✅ התשובה הסופית: <span dir="${wAnswerDir}">${nc.workedExample.answer}</span></div>
                     </div>
 
                     <div style="background:#fff; border:2.5px dashed ${c.border}; border-radius:14px; padding:16px 20px;">
                         <div style="font-size:1.15rem; font-weight:900; color:${c.titleColor}; margin-bottom:10px;">🚀 תרגיל אתגר לתרגול עצמי</div>
-                        <div style="background:${c.bg}; padding:10px 14px; border-radius:8px; font-size:1.15rem; font-weight:900; text-align:center; margin-bottom:10px;">${nc.practiceChallenge.problem}</div>
+                        <div dir="${challengeDir}" style="background:${c.bg}; padding:10px 14px; border-radius:8px; font-size:1.15rem; font-weight:900; text-align:center; margin-bottom:10px; font-family: ${challengeDir==='ltr'?'monospace':'inherit'};">${nc.practiceChallenge.problem}</div>
                         <div style="background:#fef3c7; border-right:4px solid #f59e0b; padding:10px 14px; border-radius:0 8px 8px 0; margin-bottom:10px; font-size:0.98rem;">
-                            <b>💡 רמז:</b> ${nc.practiceChallenge.hint}
+                            <b>💡 רמז:</b> <span dir="${dirForText(nc.practiceChallenge.hint)}">${nc.practiceChallenge.hint}</span>
                         </div>
                         <details style="margin-top:8px;">
                             <summary style="cursor:pointer; font-weight:700; color:${c.titleColor}; font-size:0.98rem;">🔓 לחצו לחשיפת התשובה</summary>
-                            <div style="background:${c.border}; color:#fff; padding:10px 14px; border-radius:8px; text-align:center; font-weight:900; margin-top:8px; font-size:1.1rem;">התשובה הסופית: ${nc.practiceChallenge.answer}</div>
+                            <div dir="${pAnswerDir}" style="background:${c.border}; color:#fff; padding:10px 14px; border-radius:8px; text-align:center; font-weight:900; margin-top:8px; font-size:1.1rem;">התשובה הסופית: ${nc.practiceChallenge.answer}</div>
                         </details>
                     </div>
 
@@ -2425,7 +2454,7 @@
 
                             <div class="bg-gradient-to-l from-teal-50 to-white rounded-2xl p-7 border-2 border-dashed border-teal-400 shadow-sm">
                                 <h5 class="font-black text-teal-900 text-2xl mb-4">🎯 המשימה לביצוע:</h5>
-                                <div class="text-slate-900 text-xl md:text-2xl leading-loose outline-none hover:bg-white p-3 transition rounded" contenteditable="true" onblur="AppState.stations[${index}].mission=this.innerHTML">${station.mission}</div>
+                                <div class="text-slate-900 text-xl md:text-2xl leading-loose outline-none hover:bg-white p-3 transition rounded" contenteditable="true" onblur="AppState.stations[${index}].mission=this.innerHTML">${wrapLinesByDirection(station.mission)}</div>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -2454,7 +2483,7 @@
                             <div class="mt-8 pt-5 border-t-2 border-slate-100 print-solution-block">
                                 <details class="bg-slate-50 rounded-2xl border border-slate-200 p-5" open>
                                     <summary class="font-black text-slate-700 cursor-pointer outline-none">🔑 מחוון פתרונות וסיכום (לחצי לעריכה)</summary>
-                                    <div class="mt-4 text-slate-800 text-lg font-bold leading-loose outline-none hover:bg-white p-2 transition rounded" contenteditable="true" onblur="AppState.stations[${index}].solutions=this.innerHTML">${station.solutions}</div>
+                                    <div class="mt-4 text-slate-800 text-lg font-bold leading-loose outline-none hover:bg-white p-2 transition rounded" contenteditable="true" onblur="AppState.stations[${index}].solutions=this.innerHTML">${wrapLinesByDirection(station.solutions)}</div>
                                 </details>
                             </div>
                         </div>
